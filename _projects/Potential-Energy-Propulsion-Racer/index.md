@@ -1,6 +1,6 @@
 ---
 layout: post
-title: project title
+title: Potential Energy Propulsioon Racer
 description:  short description of the project
 skills: 
 - skill 1
