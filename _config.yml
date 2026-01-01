@@ -21,7 +21,7 @@ description: >- # dont remove this line. this will ignore all new lines until th
   I'm exploring audio engineering and microcontroller programming.
 
 # Place your profile image in /assets/images/profile-image/folder and edit the file name
-profile_image: ./assets/images/profile-image/thanks lima or nina - square.jpeg
+profile_image: /assets/images/profile-image/thanks lima or nina - square.jpeg
 
 
 # Link your resume
