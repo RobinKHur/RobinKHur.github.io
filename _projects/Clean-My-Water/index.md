@@ -1,9 +1,21 @@
 ---
 layout: post
-title: project title
-description:  short description of the project
+title: Clean My Water - Xylem Filtration System
+description: Led development of a biodegradable, low-cost water filtration system using natural plant xylem to remove harmful bacteria for outdoor use. Designed and tested prototypes through iterative CAD modeling, fabrication, and laboratory bacterial analysis to create an eco-friendly alternative to commercial filters.
 skills: 
-- skill 1
-- skill 2
-main-image: /project.webp 
+  - CAD design & FEA (SolidWorks)
+  - Bacterial testing (E. coli)
+  - 3D printing (PLA)
+  - Turbidity analysis  
+  - Iterative prototyping
+  - Technical documentation
+main-image: /water-filter.png
 ---
+
+## Full Technical Report
+
+<iframe src="1020-Report-2025.pdf" width="100%" height="600px" style="border: 1px solid #ccc; border-radius: 4px;">
+  This browser does not support PDFs. Please download the PDF to view it.
+</iframe>
+
+📄 [Download Complete Technical Report](1020-Report-2025.pdf)
