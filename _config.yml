@@ -46,9 +46,6 @@ external-links:    # input only your own url slug. The icons with missing entrie
   youtube:           # https://youtube.com/@{your url slug} 
   discord:            # https://discord.com/users/{your url slug} 
   bluesky:           # https://bsky.app/profile/{your url slug} 
-contact:
-  email: robinhur2006@gmail.com
-  phone: "+1 (484) 995-5440"
 
 
 # Skills Section - Add the list of your Skills by categories/tools. The indentation for each level needs to be precise. 
