@@ -10,12 +10,5 @@ skills:
   - Iterative prototyping
   - Technical documentation
 main-image: /water-filter.png
----
-
-## Full Technical Report
-
-<iframe src="1020-Report-2025.pdf" width="100%" height="600px" style="border: 1px solid #ccc; border-radius: 4px;">
-  This browser does not support PDFs. Please download the PDF to view it.
-</iframe>
-
 📄 [Download Complete Technical Report](1020-Report-2025.pdf)
+---
