@@ -7,18 +7,18 @@ title: Portfolio # This is what shows up in the tab of the browser
 name: Robin Hur
 headline: headline message
 description: >- # dont remove this line. this will ignore all new lines until the next section
-I'm a mechanical engineering student at UVA who's drawn to projects that 
-blend creative problem-solving with hands-on building. Whether I'm working 
-in a research lab, collaborating on design teams, or prototyping new ideas, 
-I enjoy the process of taking something from concept to reality—and learning 
-whatever I need to along the way.
+  I'm a mechanical engineering student at UVA who's drawn to projects that 
+  blend creative problem-solving with hands-on building. Whether I'm working 
+  in a research lab, collaborating on design teams, or prototyping new ideas, 
+  I enjoy the process of taking something from concept to reality—and learning 
+  whatever I need to along the way.
 
-My experience spans computational work, CAD modeling, fabrication, and 
-team-based engineering projects. I'm always looking for opportunities to 
-develop new skills and contribute to work that's technically challenging and 
-genuinely useful. Outside of classes and projects, I like staying curious 
-about how things are designed and why they work the way they do. Right now, 
-I'm exploring audio engineering and microcontroller programming.
+  My experience spans computational work, CAD modeling, fabrication, and 
+  team-based engineering projects. I'm always looking for opportunities to 
+  develop new skills and contribute to work that's technically challenging and 
+  genuinely useful. Outside of classes and projects, I like staying curious 
+  about how things are designed and why they work the way they do. Right now, 
+  I'm exploring audio engineering and microcontroller programming.
 
 # Place your profile image in /assets/images/profile-image/folder and edit the file name
 profile_image: ./assets/images/profile-image/thanks lima or nina - square.jpeg
