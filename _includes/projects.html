@@ -7,30 +7,30 @@
       {% assign folder_path = item.path | split: "/" | slice: 0, 2 | join: "/" %}
       {% assign image_path = "/" | append: folder_path | append: "/" | append: item['main-image'] %}
 
-      <div class="project-link">
-        <div class="project-card">
+      <div class="project-card">
 
-          <!-- Image container with blurred background -->
-          <div class="project-image" style="background-image: url('{{ image_path }}')">
-            <img src="{{ image_path }}" alt="Screenshot of {{ item.title }}">
-          </div>
-
-          <!-- Title -->
-          <h3 class="project-title">{{ item.title }}</h3>
-
-          <!-- Skills -->
-          <div class="project-skills">
-            {% for skill in item.skills %}
-              <span class="skill">{{ skill }}</span>
-            {% endfor %}
-          </div>
-
-          <!-- Description -->
-          <p class="project-description">{{ item.description }}</p>
-
-          <!-- Read more -->
-          <a href="{{ item.url }}" class="read-more">Read more →</a>
+        <!-- Image container with blurred background -->
+        <div class="project-image" style="background-image: url('{{ image_path }}')">
+          <img src="{{ image_path }}" alt="Screenshot of {{ item.title }}" class="project-img-full">
         </div>
+
+        <!-- Title (clickable) -->
+        <h3 class="project-title">
+          <a href="{{ item.url }}">{{ item.title }}</a>
+        </h3>
+
+        <!-- Skills -->
+        <div class="project-skills">
+          {% for skill in item.skills %}
+            <span class="skill">{{ skill }}</span>
+          {% endfor %}
+        </div>
+
+        <!-- Description -->
+        <p class="project-description">{{ item.description }}</p>
+
+        <!-- Read more button -->
+        <a href="{{ item.url }}" class="read-more">Read more →</a>
       </div>
 
     {% endfor %}
