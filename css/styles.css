@@ -279,7 +279,7 @@ nav .mobile-nav {
 
 .project-grid-section .grid-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(2, 1fr); /* Always 2 columns */
     gap: 25px;
     width: 100%;
     margin: 0 auto;
