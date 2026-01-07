@@ -25,7 +25,7 @@ contact:
   phone: "+1 (484) 995-5440"
 
 # Place your profile image in /assets/images/profile-image/folder and edit the file name
-profile_image: /assets/images/profile-image/thanks lima or nina - square.jpeg
+profile_image: "/assets/images/profile-image/thanks lima or nina - square.jpeg"
 
 
 # Link your resume
