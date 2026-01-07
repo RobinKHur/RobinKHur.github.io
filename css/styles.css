@@ -282,7 +282,7 @@ nav .mobile-nav {
 /* Grid container */
 .project-grid-section .grid-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); /* 2 columns on desktop */
+    grid-template-columns: repeat(2, 1fr); /* 2 columns */
     gap: 25px;
     width: 100%;
     margin: 0 auto;
@@ -334,6 +334,7 @@ nav .mobile-nav {
     text-decoration: none;
     margin-bottom: 10px;
     transition: color 0.3s ease;
+    color: #000;  /* Black titles */
 }
 
 .project-card .project-title:hover {
@@ -355,6 +356,12 @@ nav .mobile-nav {
     background-color: var(--light-background-color);
     color: var(--link-color);
     white-space: nowrap;
+}
+/* Collapsed skills */
+.project-card .project-skills.collapsed {
+    max-height: 24px; /* shows only 1 row of skills */
+    overflow: hidden;
+    transition: max-height 0.3s ease;
 }
 
 /* Description */
