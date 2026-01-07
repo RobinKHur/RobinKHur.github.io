@@ -262,8 +262,9 @@ nav .right a:last-child:hover{
 .project-card .project-title {
     font-size: 1.4em;
     text-decoration: none;
-    transition: color 0.3s ease; /* Only transition color for performance */
-    margin-bottom: 10px
+    margin-bottom: 10px;
+    transition: color 0.3s ease;
+    color: #000;  /* Black titles */
 }
 
 .project-card .project-title:hover {
