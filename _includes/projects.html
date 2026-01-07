@@ -19,17 +19,12 @@
           <a href="{{ item.url }}">{{ item.title }}</a>
         </h3>
 
-        <!-- Skills -->
-        <div class="project-skills collapsed">
+        <!-- Skills (always visible) -->
+        <div class="project-skills">
           {% for skill in item.skills %}
             <span class="skill">{{ skill }}</span>
           {% endfor %}
         </div>
-
-        <!-- Toggle Skills Button -->
-        {% if item.skills.size > 3 %}
-          <button class="toggle-skills">Show More</button>
-        {% endif %}
 
         <!-- Description -->
         <p class="project-description">{{ item.description }}</p>
