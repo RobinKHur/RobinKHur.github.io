@@ -1,4 +1,4 @@
-<!-- SECTION 3: project -->
+<!-- SECTION 3: Projects -->
 <section id="projects" class="project-grid-section">
   <h2>Projects</h2>
 
@@ -9,30 +9,34 @@
 
       <div class="project-card">
 
-        <!-- Image container with blurred background -->
-        <div class="project-image" style="background-image: url('{{ image_path }}')">
+        <!-- Image -->
+        <div class="project-image">
           <img src="{{ image_path }}" alt="Screenshot of {{ item.title }}" class="project-img-full">
         </div>
 
-        <!-- Title (clickable) -->
+        <!-- Title -->
         <h3 class="project-title">
           <a href="{{ item.url }}">{{ item.title }}</a>
         </h3>
 
         <!-- Skills -->
-        <div class="project-skills">
+        <div class="project-skills collapsed">
           {% for skill in item.skills %}
             <span class="skill">{{ skill }}</span>
           {% endfor %}
         </div>
 
+        <!-- Toggle Skills Button -->
+        {% if item.skills.size > 3 %}
+          <button class="toggle-skills">Show More</button>
+        {% endif %}
+
         <!-- Description -->
         <p class="project-description">{{ item.description }}</p>
 
-        <!-- Read more button -->
+        <!-- Read more -->
         <a href="{{ item.url }}" class="read-more">Read more →</a>
       </div>
-
     {% endfor %}
   </div>
 </section>
