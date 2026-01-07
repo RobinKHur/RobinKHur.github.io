@@ -268,36 +268,25 @@ nav .mobile-nav {
 /* Main container */
 .project-grid-section {
     margin-top: 50px;
-    margin-bottom: 50px; /* Adjust spacing at bottom */
-    display: block; /* Remove flex to allow proper grid */
+    margin-bottom: 50px;
 }
 
-/* Section heading */
 .project-grid-section h2 {
-    font-size: 34px;
+    font-size: 40px;  /* Fixed to 40px */
     margin-bottom: 10px;
     padding: 0 10px;
 }
 
-/* Grid container */
 .project-grid-section .grid-container {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 2 columns */
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 25px;
     width: 100%;
     margin: 0 auto;
     align-items: stretch;
 }
 
-/* Link wrapper */
-.project-grid-section .project-link {
-    text-decoration: none;
-    color: inherit;
-    display: block; /* Make each link fill its grid cell */
-}
-
-/* Project card */
-.project-grid-section .grid-container .project-link .project-card {
+.project-card {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -312,7 +301,7 @@ nav .mobile-nav {
     overflow: hidden;
 }
 
-.project-grid-section .grid-container .project-link .project-card:hover {
+.project-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
@@ -322,7 +311,7 @@ nav .mobile-nav {
     width: 100%;
     max-width: 100%;
     aspect-ratio: 3/1;
-    object-fit: cover; /* Cover ensures full card width */
+    object-fit: cover;
     display: block;
     border-radius: 6px;
     margin-bottom: 10px;
@@ -331,13 +320,16 @@ nav .mobile-nav {
 /* Title */
 .project-card .project-title {
     font-size: 1.4em;
-    text-decoration: none;
     margin-bottom: 10px;
-    transition: color 0.3s ease;
-    color: #000;  /* Black titles */
 }
 
-.project-card .project-title:hover {
+.project-card .project-title a {
+    color: #000 !important;  /* Black title links */
+    text-decoration: none;
+}
+
+.project-card .project-title a:hover {
+    color: #000 !important;
     text-decoration: underline;
 }
 
@@ -357,24 +349,12 @@ nav .mobile-nav {
     color: var(--link-color);
     white-space: nowrap;
 }
-/* Collapsed skills */
-.project-card .project-skills.collapsed {
-    max-height: 24px; /* shows only 1 row of skills */
-    overflow: hidden;
-    transition: max-height 0.3s ease;
-}
 
 /* Description */
 .project-card .project-description {
-    display: -webkit-box;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    word-break: break-word;
     line-height: 1.5;
-    max-height: calc(1.5em * 4);
     margin-bottom: 10px;
+    word-break: break-word;
 }
 
 /* Read more button */
@@ -385,12 +365,12 @@ nav .mobile-nav {
     cursor: pointer;
     font-size: 0.9em;
     text-align: start;
+    display: inline-block;
 }
 
 .project-card .read-more:hover {
     text-decoration: underline;
 }
-
 
 /* SECTION 3: SKILLS */
 .skills-section {
