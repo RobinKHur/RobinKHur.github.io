@@ -672,3 +672,30 @@ a {
     color: var(--link-color);
     text-decoration: none;
 }
+.project-card .project-image {
+    position: relative;
+    width: 100%;
+    height: 200px; /* Adjust for desired card height */
+    overflow: hidden;
+    border-radius: 6px; /* Matches card styling */
+    background-size: cover;
+    background-position: center;
+    filter: blur(20px) brightness(0.6); /* Faded blurred background */
+}
+
+.project-card .project-image img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: auto;
+    height: 100%;
+    object-fit: contain; /* Ensures entire image is visible */
+    z-index: 1;
+}
+
+/* Optional: hover effect to slightly brighten background */
+.project-card:hover .project-image {
+    filter: blur(15px) brightness(0.8);
+    transition: filter 0.3s ease;
+}
