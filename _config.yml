@@ -50,25 +50,25 @@ external-links:    # input only your own url slug. The icons with missing entrie
 
 # Skills Section - Add the list of your Skills by categories/tools. The indentation for each level needs to be precise. 
 skills:
-  - category: 3D Modeling
+  - category: 3D Modeling & Prototyping
     tools:
-    - Solidworks (CSWA)
-    - Fusion 360 (Autodesk)
-    - OnShape
-  - category: Prototyping & Fabrication
-    tools:
-    - 3D-Printing (FDM)
-    - Bambu Studio
-    - Low-Fidelity Prototyping & Fabrication
-  - category: Engineering Analysis
+      - SolidWorks (CSWA)
+      - Fusion 360 (Autodesk)
+      - OnShape
+      - 3D Printing (FDM)
+      - Bambu Studio
+      - Low-Fidelity Rapid Prototyping
+  - category: Engineering Analysis & Design
     tools:
       - Finite Element Analysis (FEA)
-  - category: Design Standards & Practices
+      - GD&T (ASME Y14)
+  - category: Computational
     tools:
-    - GD&T ASME Y14
-  - category: Problem Solving & Risk Management
-    tools:
-    - Root Cause Analysis (e.g., 5 Whys, Fishbone Diagram)
+      - Python (NumPy, Matplotlib)
+      - Molecular Dynamics (AMBER)
+      - Visual Molecular Dynamics (VMD)
+      - HPC & Batch Job Management (SLURM)
+      - Data Analysis & Visualization
 
 
 # Contact Form Setup. Setup an account and copy over the key. When someone fills out the form, it will be received in your email.
