@@ -6,7 +6,6 @@ skills:
   - CAD design & FEA (SolidWorks)
   - Bacterial testing (E. coli)
   - 3D printing (PLA)
-  - Turbidity analysis  
   - Iterative prototyping
   - Technical documentation
 main-image: /water-filter.png
