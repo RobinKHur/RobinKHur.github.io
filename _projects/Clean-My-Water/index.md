@@ -10,4 +10,4 @@ skills:
   - Technical documentation
 main-image: /water-filter.png
 ---
-📄 [Download Complete Technical Report](/1020-Report-2025.pdf)
+📄 **[Download Complete Technical Report]({{ "/assets/readme/1020-Report-2025.pdf" | relative_url }})**
