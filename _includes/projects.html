@@ -26,8 +26,10 @@
           {% endfor %}
         </div>
 
-        <!-- Description -->
-        <p class="project-description">{{ item.description }}</p>
+        <!-- Truncated Description -->
+        <p class="project-description">
+          {{ item.description | truncatewords: 20, "..." }}
+        </p>
 
         <!-- Read more -->
         <a href="{{ item.url }}" class="read-more">Read more →</a>
