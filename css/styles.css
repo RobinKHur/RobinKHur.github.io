@@ -267,8 +267,8 @@ nav .mobile-nav {
 /*SECTION 2: PROJECT GRID */
 /* Main container */
 .project-grid-section {
-    margin-top: 50px;
-    margin-bottom: 50px;
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 
 .project-grid-section h2 {
@@ -280,7 +280,7 @@ nav .mobile-nav {
 .project-grid-section .grid-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr); /* Always 2 columns */
-    gap: 25px;
+    gap: 20px;
     width: 100%;
     margin: 0 auto;
     align-items: stretch;
