@@ -11,3 +11,4 @@ skills:
   - Technical documentation
 main-image: /project-racer.png
 ---
+📄 **[Download Complete Technical Report]({{ "/assets/readme/MAE2020 - Final Report.pdf" | relative_url }})**
