@@ -9,6 +9,6 @@ skills:
   - Experimental testing & data collection
   - Iterative prototyping
   - Technical documentation
-main-image: /mars-vibrator.png
+main-image: /mars-vibrator.jpg
 ---
 
