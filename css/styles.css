@@ -236,7 +236,7 @@ nav .mobile-nav {
 /* NAVIGATION ARROW */
 .arrow{
     margin-top: 125px;
-    margin-bottom: 250px;
+    margin-bottom: 200px;
     display: flex;
     justify-content: center;  
 }
