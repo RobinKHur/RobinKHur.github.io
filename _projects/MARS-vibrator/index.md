@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Effect of Vibration Frequency and Tilt Angle on Flow Behavior of Granular Material
-description: This project investigated vibration-induced apparent viscosity in granular media using sand as a terrestrial analog for lunar regolith. A vibration-actuated, variable-angle inclined platform was designed and experimentally characterized to quantify the effects of excitation frequency and deposition angle on frictional force and mass flow behavior. Steady-state flow conditions were analyzed through measurements of granular layer height, flow duration, and deposited mass across a matrix of frequency–angle inputs. The findings inform the optimization of vibration-assisted regolith excavation and deposition mechanisms for extraterrestrial construction systems.
+description: This project investigated vibration-induced apparent viscosity in granular media using sand as a terrestrial analog for lunar regolith, in the context of the NASA Lunabotics Competition. A vibration-actuated, variable-angle inclined platform was designed and experimentally characterized to quantify the effects of excitation frequency and deposition angle on frictional force and mass flow behavior. Steady-state flow conditions were analyzed through measurements of granular layer height, flow duration, and deposited mass across a matrix of frequency–angle inputs. The findings provide insights for optimizing vibration-assisted regolith excavation and deposition strategies for extraterrestrial construction systems.
 skills:
   - CAD design & FEA (SolidWorks)
   - 3D printing (PLA)
