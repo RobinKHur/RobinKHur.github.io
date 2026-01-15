@@ -12,3 +12,4 @@ skills:
   - Technical Documentation
 main-image: /peptide-vmd.png
 ---
+📄 **[Read Complete Research](https://doi.org/10.26434/chemrxiv-2026-8jxvq)**
