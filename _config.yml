@@ -53,10 +53,9 @@ skills:
   - category: 3D Modeling & Prototyping
     tools:
       - SolidWorks (CSWA)
-      - Fusion 360 (Autodesk)
+      - Autodesk Fusion
       - OnShape
       - 3D Printing (FDM)
-      - Bambu Studio
       - Low-Fidelity Rapid Prototyping
   - category: Engineering Analysis & Design
     tools:
