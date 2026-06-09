@@ -1,38 +1,36 @@
 <!-- SECTION 3: Projects -->
-<section id="projects" class="project-grid-section">
+<section id=\"projects\" class=\"project-grid-section\">
   <h2>Projects</h2>
 
-  <div class="grid-container">
+  <div class=\"grid-container\">
     {% for item in site.projects %}
-      {% assign folder_path = item.path | split: "/" | slice: 0, 2 | join: "/" %}
-      {% assign image_path = "/" | append: folder_path | append: "/" | append: item['main-image'] %}
+      {% if item['main-image'] contains '/' %}
+        {% assign image_path = item['main-image'] | relative_url %}
+      {% else %}
+        {% assign image_path = '/' | append: item['main-image'] | relative_url %}
+      {% endif %}
 
-      <div class="project-card">
+      <div class=\"project-card\">
 
-        <!-- Image -->
-        <div class="project-image">
-          <img src="{{ image_path }}" alt="Screenshot of {{ item.title }}" class="project-img-full">
+        <div class=\"project-image\">
+          <img src=\"{{ image_path }}\" alt=\"Screenshot of {{ item.title }}\" class=\"project-img-full\">
         </div>
 
-        <!-- Title -->
-        <h3 class="project-title">
-          <a href="{{ item.url }}">{{ item.title }}</a>
+        <h3 class=\"project-title\">
+          <a href=\"{{ item.url | relative_url }}\">{{ item.title }}</a>
         </h3>
 
-        <!-- Skills (always visible) -->
-        <div class="project-skills">
+        <div class=\"project-skills\">
           {% for skill in item.skills %}
-            <span class="skill">{{ skill }}</span>
+            <span class=\"skill\">{{ skill }}</span>
           {% endfor %}
         </div>
 
-        <!-- Truncated Description -->
-        <p class="project-description">
-          {{ item.description | truncatewords: 20, "..." }}
+        <p class=\"project-description\">
+          {{ item.description | truncatewords: 20, \"...\" }}
         </p>
 
-        <!-- Read more -->
-        <a href="{{ item.url }}" class="read-more">Read more →</a>
+        <a href=\"{{ item.url | relative_url }}\" class=\"read-more\">Read more →</a>
       </div>
     {% endfor %}
   </div>
