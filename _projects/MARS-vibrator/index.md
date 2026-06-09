@@ -1,14 +1,20 @@
 ---
-layout: post
-title: Effect of Vibration Frequency and Tilt Angle on Flow Behavior of Granular Material
-description: This project investigated vibration-induced apparent viscosity in granular media using sand as a terrestrial analog for lunar regolith, in the context of the NASA Lunabotics Competition. A vibration-actuated, variable-angle inclined platform was designed and experimentally characterized to quantify the effects of excitation frequency and deposition angle on frictional force and mass flow behavior. Steady-state flow conditions were analyzed through measurements of granular layer height, flow duration, and deposited mass across a matrix of frequency–angle inputs. The findings provide insights for optimizing vibration-assisted regolith excavation and deposition strategies for extraterrestrial construction systems.
-skills:
-  - CAD design & FEA (SolidWorks)
-  - 3D printing (PLA)
-  - Electrical wiring & instrumentation
-  - Experimental testing & data collection
-  - Iterative prototyping
-  - Technical documentation
-main-image: /mars-vibrator.jpg
+layout: wrapper
+title: "Regolith Active Vibration Systems"
+description: "Investigated dynamic structural acoustics and materials handling systems using physical prototyping and environmental mechanical constraints."
+skills: 
+  - Dynamic Systems
+  - Structural Prototyping
+  - Environmental Testing
+main-image: mars-vibrator.jpg
 ---
 
+# Regolith Active Vibration Systems
+
+## Project Overview
+This project focuses on evaluating components under rigorous operational variables. By applying vibrational forces to handling enclosures, the research uncovers critical behaviors in granular material settlement and active mechanical dampening configurations.
+
+## Technical Contributions
+* Designed structural testing jigs to withstand localized operational frequencies.
+* Analyzed failure points and structural acoustic metrics to ensure system reliability.
+* Utilized specialized imaging tools to record material displacement responses during dynamic frequency cycles.
