@@ -5,7 +5,7 @@ title: Portfolio # This is what shows up in the tab of the browser
 
 # Hero Section
 name: Robin Hur
-headline: 2nd Year Bachelor's of Science
+headline: 3rd Year Bachelor's of Science
 description: | # don't remove this line
   I'm a mechanical engineering student at UVA who's drawn to projects that 
   blend creative problem-solving with hands-on building. Whether I'm working 
@@ -52,16 +52,17 @@ external-links:    # input only your own url slug. The icons with missing entrie
 skills:
   - category: 3D Modeling & Prototyping
     tools:
-      - SolidWorks (CSWA)
-      - Autodesk Fusion
-      - OnShape
-      - 3D Printing (FDM)
-      - Low-Fidelity Rapid Prototyping
-  - category: Engineering Analysis & Design
+      - "SolidWorks (CSWA Certified)"
+      - "Finite Element Analysis (FEA)"
+      - "CAD Drafting & Modeling"
+      - "Autodesk (Fusion, MAYA)"
+  - category: "Analysis & Computation"
     tools:
-      - Finite Element Analysis (FEA)
-      - GD&T (ASME Y14)
-  - category: Computational
+      - "MATLAB"
+      - "Tecplot"
+      - "Data Analytics"
+      - "Fluidics & Geometric Profiles"
+  - category: "Fabrication & Validation"
     tools:
       - Python (NumPy, Matplotlib)
       - Molecular Dynamics (AMBER)
