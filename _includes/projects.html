@@ -1,36 +1,32 @@
 <!-- SECTION 3: Projects -->
-<section id=\"projects\" class=\"project-grid-section\">
+<section id="projects" class="project-grid-section">
   <h2>Projects</h2>
 
-  <div class=\"grid-container\">
+  <div class="grid-container">
     {% for item in site.projects %}
-      {% if item['main-image'] contains '/' %}
-        {% assign image_path = item['main-image'] | relative_url %}
-      {% else %}
-        {% assign image_path = '/' | append: item['main-image'] | relative_url %}
-      {% endif %}
+      {% assign image_path = item['main-image'] | relative_url %}
 
-      <div class=\"project-card\">
+      <div class="project-card">
 
-        <div class=\"project-image\">
-          <img src=\"{{ image_path }}\" alt=\"Screenshot of {{ item.title }}\" class=\"project-img-full\">
+        <div class="project-image">
+          <img src="{{ image_path }}" alt="Visual documentation for {{ item.title }}" class="project-img-full">
         </div>
 
-        <h3 class=\"project-title\">
-          <a href=\"{{ item.url | relative_url }}\">{{ item.title }}</a>
+        <h3 class="project-title">
+          <a href="{{ item.url | relative_url }}">{{ item.title }}</a>
         </h3>
 
-        <div class=\"project-skills\">
+        <div class="project-skills">
           {% for skill in item.skills %}
-            <span class=\"skill\">{{ skill }}</span>
+            <span class="skill">{{ skill }}</span>
           {% endfor %}
         </div>
 
-        <p class=\"project-description\">
-          {{ item.description | truncatewords: 20, \"...\" }}
+        <p class="project-description">
+          {{ item.description | truncatewords: 22, "..." }}
         </p>
 
-        <a href=\"{{ item.url | relative_url }}\" class=\"read-more\">Read more →</a>
+        <a href="{{ item.url | relative_url }}" class="read-more">Read more →</a>
       </div>
     {% endfor %}
   </div>
