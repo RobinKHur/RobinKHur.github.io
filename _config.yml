@@ -50,26 +50,23 @@ external-links:    # input only your own url slug. The icons with missing entrie
 
 # Skills Section - Add the list of your Skills by categories/tools. The indentation for each level needs to be precise. 
 skills:
-  - category: 3D Modeling & Prototyping
+  - category: "Design & Simulation"
     tools:
-      - SolidWorks (CSWA)
-      - Autodesk Fusion
-      - OnShape
-      - 3D Printing (FDM)
-      - Low-Fidelity Rapid Prototyping
-  - category: Engineering Analysis & Design
+      - "SolidWorks (CSWA Certified)"
+      - "Finite Element Analysis (FEA)"
+      - "CAD Drafting & Modeling"
+  - category: "Analysis & Computation"
     tools:
-      - Finite Element Analysis (FEA)
-      - GD&T (ASME Y14)
-  - category: Computational
+      - "MATLAB"
+      - "Data Analytics"
+      - "Fluidics & Geometric Profiles"
+  - category: "Fabrication & Validation"
     tools:
-      - Python (NumPy, Matplotlib)
-      - Molecular Dynamics (AMBER)
-      - Visual Molecular Dynamics (VMD)
-      - HPC & Batch Job Management (SLURM)
-      - Data Analysis & Visualization
+      - "3D Printing & Prototyping"
+      - "Laboratory Testing & Safety Protocols"
+      - "Technical Documentation"
 
-
+      
 # Contact Form Setup. Setup an account and copy over the key. When someone fills out the form, it will be received in your email.
 #formspree-key:   https://formspree.io/f/{8-digit key}
 
