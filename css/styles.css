@@ -281,22 +281,28 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   row-gap: 1.5rem;
 }
 
-/* ASCII self-portrait as a faded backdrop that fills the entire home section — anchors to `.home` directly (not `.home__container`) so inset:0 spans the full window width, which is why the figure now touches the left edge. position:absolute + z-index:0 puts it behind the bio block; opacity 0.65 + a right-side mask gradient (full opaque to 22%, mid fade through 58%, fully transparent by 92%) keeps the figure's left half dominant before fading under the bio column so the text reads on top. pointer-events:none so clicks pass through to anything layered above. */
+/* ASCII self-portrait as a faded backdrop that fills the entire home section — anchors to `.home` directly (not `.home__container`) so inset:0 spans the full window width, which is why the figure now touches the left edge. position:absolute + z-index:0 puts it behind the bio block; opacity 0.65 + a right-side mask gradient (full opaque to 14%, mid fade through 35%, fully transparent by 55%) keeps the figure dominant on the left before fading into the bio column.
+
+   Bio column math: container max-width 1120px is centered (or fills the viewport on narrower screens), with a 1.5fr/1fr grid + 4rem column gap at >=1150. The bio column starts at ≈57.8–58.8% of the home section width and ends at ≈88.9% (the container's right edge). Setting `transparent` at 55% puts the figure at 0% opacity from there onward, so the bio column has zero visual competition — the figure genuinely fades "into" the bio text rather than competing behind it. Pulling the stops inward (vs the earlier 16%/45%/80% in commit history) was needed because the 1.5× font bump made the residual ~30% opacity at the bio-column edge hit harder.
+
+   - `pointer-events: none` so clicks pass through to anything layered above.
+   - `user-select: none` so dragging the cursor across the figure doesn't highlight the ASCII glyphs — the figure is decorative (`aria-hidden="true"`) and selection is a UX defect. user-select inherits per the CSS UA stylesheet, so the inner .home__ascii-art__pre also can't be highlighted from a parent-level setting. */
 .home__ascii-art {
   position: absolute;
   inset: 0;
   z-index: 0;
   text-align: left;
   pointer-events: none;
+  user-select: none;
   opacity: 0.65;
-  -webkit-mask-image: linear-gradient(to right, black 22%, rgba(0, 0, 0, 0.55) 58%, transparent 92%);
-          mask-image: linear-gradient(to right, black 22%, rgba(0, 0, 0, 0.55) 58%, transparent 92%);
+  -webkit-mask-image: linear-gradient(to right, black 14%, rgba(0, 0, 0, 0.55) 35%, transparent 55%);
+          mask-image: linear-gradient(to right, black 14%, rgba(0, 0, 0, 0.55) 35%, transparent 55%);
 }
 
 .home__ascii-art__pre {
   font-family: ui-monospace, "SF Mono", Menlo, Consolas, "Courier New", monospace;
-  /* Sized up 25% (1.25×) from the previous clamp(2.75px, 0.325vw, 6px). History of clamps: 22/2.6/48 → 11/1.3/24 → 5.5/0.65/12 → 2.75/0.325/6 → now 3.4375/0.40625/7.5. Floor 3.4375px keeps the figure readable on narrow viewports; 0.40625vw scales smoothly with screen width; 7.5px ceiling on wide breakpoints. line-height:1.3 prevents glyph descenders clipping the row above at the small sizes. No max-width on the <pre> — `.home__ascii-art` is the positioning context (inset:0 spans the full section width) and applies the right-to-left mask gradient that fades the figure under the bio column. */
-  font-size: clamp(3.4375px, 0.40625vw, 7.5px);
+  /* Sized up 50% (1.5×) from the previous clamp(3.4375px, 0.40625vw, 7.5px). History of clamps: 22/2.6/48 → 11/1.3/24 → 5.5/0.65/12 → 2.75/0.325/6 → 3.4375/0.40625/7.5 → now 5.15625/0.609/11.25. Floor 5.15625px keeps the figure readable on narrow viewports; 0.609vw scales smoothly with screen width; 11.25px ceiling on wide breakpoints. The user-visible goal at this size is for the figure to read as a real backdrop that fades into the bio column at the right-to-left mask stops (58% / 92%) instead of disappearing as texture. line-height:1.3 prevents glyph descenders clipping the row above. No max-width on the <pre> — `.home__ascii-art` is the positioning context (inset:0 spans the full section width) and applies the right-to-left mask gradient that fades the figure under the bio column. */
+  font-size: clamp(5.15625px, 0.609vw, 11.25px);
   line-height: 1.3;
   color: var(--text-color);
   white-space: pre;
