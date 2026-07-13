@@ -29,7 +29,7 @@ Drop the cover image in the same folder.
 
 ## Edit content
 
-`_config.yml` — name, headline, contact, social links, skills. Lives at site root.
+`_config.yml` — name, tagline (role + pitch), site description, contact, social links, skills. Lives at site root.
 
 ## Layout
 
