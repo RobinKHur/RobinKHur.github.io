@@ -5,7 +5,7 @@
 :root {
   --header-height: 3.5rem;
 
-  /*========== Colors ==========*/
+  /*========== Colors ===========*/
   --first-color: hsl(14, 98%, 50%);
   --first-color-alt: hsl(14, 98%, 57%);
   --black-color: hsl(0, 0%, 0%);
@@ -17,7 +17,7 @@
   --body-color: hsl(0, 0%, 87%);
   --container-color: hsl(0, 0%, 83%);
 
-  /*========== Font and typography ==========*/
+  /*========== Font and typography ===========*/
   --body-font: "Bai Jamjuree", sans-serif;
   --biggest-font-size: 2.5rem;
   --h1-font-size: 1.75rem;
@@ -27,13 +27,13 @@
   --small-font-size: 0.813rem;
   --smaller-font-size: 0.75rem;
 
-  /*========== Font weight ==========*/
+  /*========== Font weight ===========*/
   --font-regular: 400;
   --font-medium: 500;
   --font-semi-bold: 600;
   --font-bold: 700;
 
-  /*========== z index ==========*/
+  /*========== z index ===========*/
   --z-tooltip: 10;
   --z-fixed: 100;
 }
@@ -81,7 +81,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 /*=============== REUSABLE CSS CLASSES ===============*/
 .container {
   max-width: 1120px;
-  margin-inline: 1.5rem;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
 }
 
 .grid {
@@ -261,34 +262,52 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 /*=============== HOME ===============*/
 .home {
-  padding-top: calc(var(--header-height) + 2rem);
+  padding-top: calc(var(--header-height) + 1rem);
 }
 
 .home__container {
   position: relative;
-  row-gap: 0;
+  row-gap: 1.25rem;
 }
 
-.home__perfil {
-  width: 220px;
-  height: 220px;
+/* ASCII art sits at the very top of home, centred under the fixed header */
+.home__ascii-art {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.home__ascii-art__pre {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, "Courier New", monospace;
+  font-size: clamp(3px, 0.55vw, 7px);
+  line-height: 1;
+  color: var(--text-color);
   background-color: var(--container-color);
-  border-radius: 50%;
-  overflow: hidden;
-  display: grid;
-  place-items: center;
-  margin-inline: auto;
+  padding: 1rem 0.75rem;
+  border-radius: 0.75rem;
+  overflow-x: auto;
+  margin: 0 auto;
+  max-width: 100%;
+  white-space: pre;
+  text-align: left;
 }
 
-.home__perfil img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.home__ascii-art__caption {
+  margin-top: 0.75rem;
+  font-size: var(--smaller-font-size);
+  color: var(--text-color-light);
+  font-style: italic;
+}
+
+.home__ascii-art__caption code {
+  font-size: 0.95em;
+  background-color: var(--body-color);
+  padding: 0 0.25rem;
+  border-radius: 0.25rem;
 }
 
 .home__data {
   text-align: center;
-  margin-top: 1.5rem;
+  margin-top: 0.5rem;
 }
 
 .home__name {
@@ -376,54 +395,46 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   color: var(--white-color);
 }
 
+/* Scroll-down now uses an SVG arrow from the Rian reference instead of CSS animation */
 .home__scroll {
-  position: absolute;
-  bottom: 2.5rem;
-  left: 50%;
-  transform: translateX(-50%);
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
+  margin: 2rem auto 0;
   color: var(--title-color);
   font-weight: var(--font-medium);
   font-size: var(--small-font-size);
+  text-align: center;
 }
 
-.home__scroll-box {
-  width: 28px;
-  height: 44px;
-  border: 2px solid var(--title-color);
-  border-radius: 1rem;
-  position: relative;
+.home__scroll-img {
+  width: 36px;
+  height: auto;
+  aspect-ratio: 53 / 68;
+  transition: transform 0.4s ease;
+  animation: scroll-bounce 2s ease infinite;
 }
 
-.home__scroll-box::before {
-  content: "";
-  width: 4px;
-  height: 8px;
-  background-color: var(--title-color);
-  border-radius: 1rem;
-  position: absolute;
-  top: 0.75rem;
-  left: 50%;
-  transform: translateX(-50%);
-  animation: scroll-wheel 2s ease infinite;
+.home__scroll:hover .home__scroll-img {
+  transform: translateY(4px);
 }
 
-@keyframes scroll-wheel {
-  0% { transform: translate(-50%, 0); opacity: 1; }
-  100% { transform: translate(-50%, 1rem); opacity: 0; }
+@keyframes scroll-bounce {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(6px); }
 }
 
 /*=============== ABOUT ===============*/
 .about__container { row-gap: 2.5rem; }
 
+/* Square crop (was 50% circle) — soft square as the user asked */
 .about__perfil {
   width: 220px;
   height: 220px;
   background-color: var(--container-color);
-  border-radius: 50%;
+  border-radius: 0.5rem;
   overflow: hidden;
   display: grid;
   place-items: center;
@@ -434,42 +445,15 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 .about__data { text-align: center; }
 
-.about__info {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-  margin: 1.5rem 0;
-}
-
-.about__box {
-  background-color: var(--container-color);
-  border-radius: 0.75rem;
-  padding: 1rem 0.5rem;
-  text-align: center;
-}
-
-.about__icon {
-  font-size: 1.5rem;
-  color: var(--first-color);
-  margin-bottom: 0.5rem;
-  display: block;
-}
-
-.about__title {
-  font-size: var(--normal-font-size);
-  color: var(--text-color-light);
-  font-weight: var(--font-medium);
-}
-
-.about__subtitle {
-  font-size: var(--h3-font-size);
-  color: var(--title-color);
-  font-weight: var(--font-bold);
+/* The new simpler About column: bio paragraph only (no count boxes, no CV button) */
+.about__data--simple {
+  margin-top: 0.5rem;
 }
 
 .about__description {
-  margin-bottom: 1.5rem;
+  margin-bottom: 0;
   color: var(--text-color);
+  line-height: 1.7;
 }
 
 /*=============== SERVICES ===============*/
@@ -529,7 +513,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 /*=============== PROJECTS ===============*/
 .projects__container {
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
+  gap: 1.5rem;
 }
 
 .projects__card {
@@ -632,7 +616,24 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 
 /*=============== CONTACT ===============*/
-.contact__container { row-gap: 2rem; }
+.contact { position: relative; }
+
+.contact__deco {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 120px;
+  height: 180px;
+  opacity: 0.32;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.contact__container {
+  position: relative;
+  z-index: 1;
+  row-gap: 2rem;
+}
 
 .contact__info {
   display: grid;
@@ -806,9 +807,13 @@ button:focus-visible {
   margin-bottom: 1rem;
 }
 
-.post-summary__description {
+.post-summary__description,
+.post-content {
   color: var(--text-color);
   margin-bottom: 1rem;
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
+  hyphens: auto;
 }
 
 .post-summary__skills {
@@ -888,14 +893,14 @@ button:focus-visible {
 @media screen and (min-width: 768px) {
   .home__container {
     grid-template-columns: 1fr 1fr;
-    align-items: center;
-    column-gap: 4rem;
+    align-items: start;
+    column-gap: 2rem;
   }
-  .home__perfil { margin-inline: 0; }
+  /* ASCII art sits in the left column; name + data in the right column */
+  .home__ascii-art { text-align: left; }
   .home__data { text-align: initial; }
   .home__social { justify-content: flex-start; }
   .home__info { justify-content: flex-start; }
-  .home__scroll { transform: translateX(0); }
 
   .about__container {
     grid-template-columns: 1fr 1.5fr;
@@ -913,23 +918,31 @@ button:focus-visible {
 
 /* For large devices */
 @media screen and (min-width: 1150px) {
-  .container { margin-inline: auto; }
+  .container { padding-inline: 0; }
   .nav { height: calc(var(--header-height) + 1rem); }
 
-  .home__container {
-    grid-template-columns: 480px 1fr;
-    column-gap: 6rem;
-    padding-block: 7rem 4rem;
+  .home {
+    padding-top: calc(var(--header-height) + 2rem);
   }
-  .home__perfil { width: 320px; height: 320px; }
-  .home__name { font-size: var(--biggest-font-size); }
-  .home__scroll { left: initial; right: -2rem; }
 
-  .about__container { grid-template-columns: 360px 1fr; column-gap: 6rem; }
+  .home__container {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: start;
+    column-gap: 4rem;
+    padding-block: 4rem 5rem;
+  }
+  .home__ascii-art { text-align: left; }
+  .home__name { font-size: var(--biggest-font-size); }
+
+  .about__container { grid-template-columns: 320px 1fr; column-gap: 4rem; }
   .about__perfil { width: 320px; height: 320px; }
 
   .services__container { grid-template-columns: repeat(3, 1fr); }
-  .projects__container { grid-template-columns: repeat(2, 1fr); }
+
+  /* 3-col projects grid (user-requested change) */
+  .projects__container { grid-template-columns: repeat(3, 1fr); }
 
   .footer__container { padding-inline: 1.5rem; }
+
+  .home__scroll { position: absolute; bottom: 1.5rem; left: 50%; }
 }
