@@ -16,6 +16,8 @@
   --text-color-light: hsl(0, 0%, 64%);
   --body-color: hsl(0, 0%, 87%);
   --container-color: hsl(0, 0%, 83%);
+  /* Page background — separates from --body-color so the page/navbar can be pure white while the pill-style chips (.services__list-item, .projects__skills li, .post-summary__skills li) keep their tinted grey. */
+  --page-bg: hsl(0, 0%, 100%);
 
   /*========== Font and typography ===========*/
   --body-font: "Bai Jamjuree", sans-serif;
@@ -63,7 +65,7 @@ html { scroll-behavior: smooth; }
 body {
   font-family: var(--body-font);
   font-size: var(--normal-font-size);
-  background-color: var(--body-color);
+  background-color: var(--page-bg);
   color: var(--text-color);
   line-height: 1.6;
 }
@@ -145,9 +147,11 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   top: 0;
   left: 0;
   right: 0;
-  background-color: var(--body-color);
+  /* White to match the new --page-bg so there's no color break with the home section underneath. */
+  background-color: var(--page-bg);
   z-index: var(--z-fixed);
-  transition: box-shadow 0.3s ease, background-color 0.3s ease;
+  /* background-color was removed from the transition shorthand: nav stays white in both default and scrolled states, so animating it was a no-op. Box-shadow still animates the depth cue on `.header.shadow-header`. */
+  transition: box-shadow 0.3s ease;
 }
 
 .header.shadow-header {
@@ -263,11 +267,13 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 /*=============== HOME ===============*/
 .home {
   padding-top: calc(var(--header-height) + 2rem);
-  /* Pure white so the ASCII backdrop reads clearly as "not grey" against the body's hsl(0,0%,87%). */
-  background-color: #ffffff;
-  /* Positioning context for the absolute ASCII art (anchors it to the full window width so the figure touches the left edge), plus clips it so it never bleeds into the About section. */
+  /* Slight extension so the home section feels less cramped. Note: `.section { padding-block: 4rem 2rem }` already declares bottom padding on this same element, but `.home` is defined later in the stylesheet so this value replaces (not adds to) the section's 2rem. Bumping to 4rem gives a net +2rem of extension across all breakpoints without touching the (>=1150px) `.home__container { padding-block: 3rem 5rem }` which already dominates on large screens. */
+  padding-bottom: 4rem;
+  /* Positioning context for the absolute ASCII art (anchors it to the full window width so the figure touches the left edge). Background inherits from the page (`var(--page-bg)`) so the home section visually flows with body + navbar — no color break.
+     - `z-index: 1` creates a stacking context so the whole section (including the now-overlaid `.home__scroll`) paints above the later-in-DOM `.about`; without it, the scroll button's half-overflowing segment would be hidden behind about's content because about follows `.home` in source order and would otherwise paint last.
+     - `overflow` was changed from `hidden` to `visible` so the absolutely-positioned `.home__scroll` (which extends `translateY(50%)` below `.home`'s bottom edge at >=1150px) can render outside the section box. The ASCII art itself doesn't bleed: it is anchored with `inset: 0` directly to `.home`, so its visible box still equals the section box either way. */
   position: relative;
-  overflow: hidden;
+  z-index: 1;
 }
 
 .home__container {
@@ -289,8 +295,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 .home__ascii-art__pre {
   font-family: ui-monospace, "SF Mono", Menlo, Consolas, "Courier New", monospace;
-  /* Halved scale (was clamp(22, 2.6vw, 48) per user “reduce ASCII by half” → now 11 / 1.3vw / 24). line-height:1.1 keeps rows a bit taller than the natural cell ratio. No max-width/overflow — `.home` is now the positioning context and trims via overflow:hidden + mask. */
-  font-size: clamp(11px, 1.3vw, 24px);
+  /* Re-halved: was clamp(22px, 2.6vw, 48px) → first halving clamp(11px, 1.3vw, 24px) → now clamp(5.5px, 0.65vw, 12px). Floor of 5.5px keeps it legible on narrow viewports; 0.65vw scales smoothly with screen width; 12px ceiling on very wide screens. line-height:1.1 keeps rows a bit taller than the natural cell ratio. No max-width/overflow — `.home` is now the positioning context and trims via overflow:hidden + mask. */
+  font-size: clamp(5.5px, 0.65vw, 12px);
   line-height: 1.1;
   color: var(--text-color);
   white-space: pre;
@@ -693,7 +699,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 /*=============== FOOTER ===============*/
 .footer {
-  background-color: var(--container-color);
+  /* White to match the rest of the page so the bottom of the site flows without a color break. */
+  background-color: var(--page-bg);
   padding-block: 2rem 1.5rem;
   text-align: center;
 }
@@ -718,7 +725,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 .footer__copy {
   font-size: var(--smaller-font-size);
-  color: var(--text-color-light);
+  /* Bumped from --text-color-light (64%) to --text-color (35%) because the footer is now white: the previous 4.4:1 contrast at 0.75rem was just below WCAG AA, and darkening to ~8:1 keeps small footer text comfortably legible without making it visually loud. */
+  color: var(--text-color);
 }
 
 /*=============== SCROLL UP ===============*/
@@ -874,7 +882,8 @@ button:focus-visible {
     width: 80%;
     max-width: 320px;
     height: 100vh;
-    background-color: var(--container-color);
+    /* White to match the page + top nav so opening the mobile drawer doesn't introduce a grey band beneath the (now white) navbar. */
+    background-color: var(--page-bg);
     flex-direction: column;
     padding: 6rem 2rem 2rem;
     gap: 1.5rem;
@@ -933,9 +942,7 @@ button:focus-visible {
   .container { padding-inline: 0; }
   .nav { height: calc(var(--header-height) + 1rem); }
 
-  .home {
-    padding-top: calc(var(--header-height) + 2rem);
-  }
+  /* The `padding-top` and `background` declarations from base .home already apply here — the old re-declaration was a no-op left from earlier revisions and gets dropped. */
 
   .home__container {
     grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
@@ -955,5 +962,13 @@ button:focus-visible {
 
   .footer__container { padding-inline: 1.5rem; }
 
-  .home__scroll { position: absolute; bottom: 1.5rem; left: 50%; }
+  /* The scroll-down indicator now straddles the seam between home and about at large screens. `bottom: 0` anchors it to .home's bottom edge; `transform: translate(-50%, 50%)` shifts it down by half its own height so the upper half sits inside home and the lower half visually overlays about's top region. This works because `.home` has `z-index: 1` (it's its own stacking context) — it paints above the later-in-DOM `.about`, so the half-overflowing segment stays visible instead of being hidden behind about's first row. `z-index: 5` places the button above .home__ascii-art (0) and .home__data (2) inside home's stacking order. */
+  .home__scroll {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    z-index: 5;
+    margin: 0;
+  }
 }
