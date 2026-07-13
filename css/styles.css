@@ -306,8 +306,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 .home__ascii-art__pre {
   font-family: ui-monospace, "SF Mono", Menlo, Consolas, "Courier New", monospace;
-  /* Reduced another 25% (0.75×) from the previous clamp(6.05px, 0.71vw, 13.19px) → exact math gives 4.5375 / 0.5325 / 9.8925, written as clamp(4.54px, 0.53vw, 9.89px) below. History of clamps: 22/2.6/48 → 11/1.3/24 → 5.5/0.65/12 → 2.75/0.325/6 → 3.4375/0.40625/7.5 → 5.15625/0.609/11.25 → 6.45/0.76/14.06 → 8.06/0.95/17.58 → 6.05/0.71/13.19 → now 4.54/0.53/9.89. Floor 4.54px keeps the figure visible on narrow viewports; 0.53vw scales smoothly; 9.89px ceiling on wide breakpoints. At the ceiling the figure is ≈810px tall (63 lines × 1.3 × 9.89) — comfortably inside `.home { min-height: clamp(875px, 75vh, 1625px) }`. line-height:1.3 prevents glyph descenders clipping the row above. No max-width on the <pre> — `.home__ascii-art` is the positioning context (inset:0 spans the full section width). */
-  font-size: clamp(4.54px, 0.53vw, 9.89px);
+  /* Sized to ≈55–60% of viewport width per the user's "55–60% of the page at full screen" target. The 134-char monospace pre at 0.6em char-width gives figure width ≈ 0.575 × viewport (≈ 822px @ 1440 viewport, ≈ 1096px @ 1920 viewport ≈ 57%). Settled on `clamp(4px, 0.71vw, 16px)`: floor 4px prevents sub-legibility on very narrow screens, 0.71vw scales linearly so the ratio stays in the 50–60% band across desktop viewports, ceiling 16px caps how tall the figure grows on ultra-wide. History of clamps: 22/2.6/48 → 11/1.3/24 → 5.5/0.65/12 → 2.75/0.325/6 → 3.4375/0.40625/7.5 → 5.15625/0.609/11.25 → 6.45/0.76/14.06 → 8.06/0.95/17.58 → 6.05/0.71/13.19 → 4.54/0.53/9.89 → now 4/0.71/16. line-height:1.3 prevents glyph descenders clipping the row above. No max-width on the <pre> — `.home__ascii-art` is the positioning context (inset:0 spans the full section width). */
+  font-size: clamp(4px, 0.71vw, 16px);
   line-height: 1.3;
   color: var(--text-color);
   white-space: pre;
