@@ -6,9 +6,10 @@ layout: wrapper
     {%- assign folder_path = page.path | split: "/" | slice: 0, 2 | join: "/" -%}
     {%- assign image_path = "/" | append: folder_path | append: page['main-image'] -%}
 
-    <a href="{{ '/' | relative_url }}#projects" class="button button-ghost" style="margin-bottom: 1.5rem">
+
+    <a href="{{ '/' | relative_url }}#projects" class="post-breadcrumb" aria-label="Back to projects">
         <i class="ri-arrow-left-line" aria-hidden="true"></i>
-        Back to projects
+        Projects
     </a>
 
     <article class="post-summary">

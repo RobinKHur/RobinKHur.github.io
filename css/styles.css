@@ -302,11 +302,18 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   margin-bottom: 0.5rem;
 }
 
-.home__headline {
+.home__tagline {
   font-size: var(--h2-font-size);
-  font-weight: var(--font-medium);
-  color: var(--black-color-light);
+  font-weight: var(--font-regular);
+  color: var(--text-color);
+  line-height: 1.6;
+  max-width: 480px;
   margin-bottom: 1rem;
+}
+
+.home__tagline-role {
+  font-weight: var(--font-bold);
+  color: var(--first-color);
 }
 
 .home__social {
@@ -325,26 +332,6 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .home__social-link:hover {
   color: var(--first-color);
   transform: translateY(-3px);
-}
-
-.home__info {
-  display: flex;
-  justify-content: center;
-  column-gap: 1.25rem;
-  margin-bottom: 2rem;
-}
-
-.home__info-item { text-align: center; }
-
-.home__info-title {
-  font-size: var(--h2-font-size);
-  font-weight: var(--font-bold);
-  color: var(--title-color);
-}
-
-.home__info-name {
-  font-size: var(--smaller-font-size);
-  color: var(--text-color-light);
 }
 
 .home__button,
@@ -771,6 +758,19 @@ button:focus-visible {
 }
 
 /*=============== POST (project detail page) ===============*/
+.post-breadcrumb {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: var(--small-font-size);
+  color: var(--text-color-light);
+  text-decoration: none;
+  margin-bottom: 0.75rem;
+  transition: color 0.3s ease;
+}
+
+.post-breadcrumb:hover { color: var(--first-color); }
+
 .post-view { padding-top: calc(var(--header-height) + 2rem); }
 
 .post-summary {
@@ -885,7 +885,6 @@ button:focus-visible {
   /* ASCII art sits in the left column; name + data in the right column */
   .home__data { text-align: initial; }
   .home__social { justify-content: flex-start; }
-  .home__info { justify-content: flex-start; }
 
   .about__container {
     grid-template-columns: 1fr 1.5fr;
