@@ -4,7 +4,7 @@
 
         <div class="home__data">
             <h1 class="home__name">{{ site.name }}</h1>
-            <h3 class="home__headline">{{ site.headline }}</h3>
+            <p class="home__tagline">— <span class="home__tagline-role">{{ site.tagline.role }}</span>{{ site.tagline.pitch }}</p>
 
             {%- if site.external-links.linkedin or site.external-links.github or site.contact.email -%}
             <div class="home__social">
@@ -26,28 +26,10 @@
             </div>
             {%- endif -%}
 
-            <div class="home__info">
-                <div class="home__info-item">
-                    <h3 class="home__info-title">{{ site.projects | size }}+</h3>
-                    <span class="home__info-name">Projects</span>
-                </div>
-                <div class="home__info-item">
-                    <h3 class="home__info-title">{{ site.skills | size }}</h3>
-                    <span class="home__info-name">Skill Areas</span>
-                </div>
-            </div>
-
             <a href="#about" class="home__button">
                 More About Me
                 <i class="ri-arrow-down-line" aria-hidden="true"></i>
             </a>
-
-            {%- if site.resume-url -%}
-            <a href="{{ site.resume-url }}" target="_blank" rel="noopener noreferrer" class="button button-ghost" style="margin-left:.75rem">
-                View Resume
-                <i class="ri-file-text-line" aria-hidden="true"></i>
-            </a>
-            {%- endif -%}
         </div>
 
         <a href="#about" class="home__scroll" aria-label="Scroll to about">

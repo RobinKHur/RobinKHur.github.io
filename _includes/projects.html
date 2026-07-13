@@ -6,35 +6,7 @@
 
     <div class="projects__container container grid">
         {%- for item in site.projects -%}
-        {%- assign folder_path = item.path | split: "/" | slice: 0, 2 | join: "/" -%}
-        {%- assign image_path = "/" | append: folder_path | append: item['main-image'] -%}
-
-        <article class="projects__card">
-            <a href="{{ item.url }}" class="projects__image" aria-label="View project: {{ item.title }}">
-                <img src="{{ image_path | relative_url }}" alt="{{ item.title }}" loading="lazy">
-                <span class="projects__button">
-                    <i class="ri-arrow-right-up-line" aria-hidden="true"></i>
-                </span>
-            </a>
-
-            <div class="projects__content">
-                <span class="projects__subtitle">Mechanical / Computational</span>
-                <h3 class="projects__title">
-                    <a href="{{ item.url }}">{{ item.title }}</a>
-                </h3>
-                <p class="projects__description">{{ item.description | truncatewords: 22, "..." }}</p>
-
-                <ul class="projects__skills">
-                    {%- assign skill_count = 0 -%}
-                    {%- for skill in item.skills -%}
-                    {%- if skill_count < 3 -%}
-                    <li>{{ skill }}</li>
-                    {%- assign skill_count = skill_count | plus: 1 -%}
-                    {%- endif -%}
-                    {%- endfor -%}
-                </ul>
-            </div>
-        </article>
+        {% include project-card.html item=item truncate="true" max_skills=3 %}
         {%- endfor -%}
     </div>
 </section>

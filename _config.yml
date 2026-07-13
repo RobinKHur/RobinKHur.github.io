@@ -26,6 +26,10 @@ profile_image: "/assets/images/profile-image/profile.jpg"
 
 resume-url: /assets/resume/resume.pdf
 
+tagline:
+  role: "Mechanical Engineering student"
+  pitch: ", focusing on computational research, fabrication, and team-based engineering projects at UVA."
+
 external-links:
   linkedin: robinkhur
   github: RobinKHur
