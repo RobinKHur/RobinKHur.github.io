@@ -38,6 +38,7 @@ skills:
     tools:
       - SolidWorks (CSWA)
       - Autodesk Fusion
+      - Autodesk Maya
       - OnShape
       - 3D Printing (FDM)
       - Low-Fidelity Rapid Prototyping
@@ -52,7 +53,6 @@ skills:
       - Python (NumPy, Matplotlib)
       - Molecular Dynamics (AMBER)
       - Visual Molecular Dynamics (VMD)
-      - Autodesk Maya
       - HPC & Batch Job Management (SLURM)
       - Data Analysis & Visualization
 
