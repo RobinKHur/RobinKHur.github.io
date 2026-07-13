@@ -93,13 +93,18 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 
 .section {
-  padding-block: 4rem 2rem;
+  /* Vertical breathing room trimmed from `4rem 2rem` to `3rem 1.5rem` — about / services / projects / contact sit a touch tighter, less wasted whitespace between section title and content. The `.home` rule (defined later) re-declares its own padding-top and padding-bottom so the home section keeps its looser rhythm unchanged. Posts (`.post-summary`, `.post-content`) and footer use `padding-block` directly and aren't affected by this base rule. */
+  padding-block: 3rem 1.5rem;
 }
 
 .section__title {
   position: relative;
   font-size: var(--h1-font-size);
-  width: max-content;
+  /* width: fit-content + max-width: 100% caps the element at the parent's width. The previous value (max-content) let the element expand to its longest unbreakable line — fine for short labels like "Projects" / "Contact" (longest word well under parent width) but a hazard for future long titles with no spaces or unbreakable tokens (long URLs, single-word identifiers, post detail page titles that wrap). Word-wrap + overflow-wrap are belt-and-braces guards against unbreakable token overflow. The orange ::after highlight box continues to size correctly for short single-line labels (Projects / Services / Contact / About / Home); on the post detail page where titles wrap, .title-header .section__title::after { content: none } hides it. */
+  width: fit-content;
+  max-width: 100%;
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
   margin: 0.75rem auto 2rem;
   text-align: center;
 }
@@ -163,6 +168,9 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   display: flex;
   justify-content: space-between;
   align-items: center;
+  /* Bring navbar text close to window borders: span the full viewport width instead of sitting inside the centered 1120px container (which leaves ~160px of empty space from viewport edge to nav content at >=1150px). Tight 0.75rem side padding keeps a small touch-target margin without padding-out the brand/links. The override has specificity (0,2,0) and beats `.container { max-width: 1120px }` and `.container { padding-inline: 0 }` inside the (>=1150px) media block — so this rule governs the navbar at every viewport width and the rest of the page still uses the centered container layout. */
+  max-width: 100%;
+  padding-inline: 0.75rem;
 }
 
 .nav__logo {
@@ -441,7 +449,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 .services__card {
   background-color: var(--container-color);
-  padding: 2rem 1.5rem;
+  /* Padding tightened from `2rem 1.5rem` to `1.5rem 1.25rem` — services cards scale a touch smaller, more chips fit before the card grows tall. Doesn't affect the home section at all (home doesn't render services cards). */
+  padding: 1.5rem 1.25rem;
   border-radius: 1rem;
   position: relative;
   overflow: hidden;
@@ -569,6 +578,16 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   overflow-wrap: anywhere;
   line-height: 1.4;
 }
+
+/* Project detail page (post.html) renders the title inside an h1.section__title. Base .section__title now wraps cleanly (width: fit-content + max-width: 100%), so most of the override from the prior commit drops out. What remains is layout-aesthetic only:
+   - line-height: 1.2 tightens from the inherited h1 default (body line-height: 1.6) so multi-line project titles pack a touch tighter
+   - ::after { content: none } hides the geometric-box decoration — its absolute right:-8px top:-4px position is meant for short single-line labels (Projects / Contact) and sits awkwardly at the top-right corner of just the first line on multi-line wraps.
+
+   margin-inline: auto is NOT re-declared here even though the parent .title-header has no center-margin: base `.section__title { margin: 0.75rem auto 2rem }` already centers the element and the post.html inline `style="margin: 0.75rem auto 1rem"` overrides the block-end value but re-affirms margin-inline: auto. The .title-header override adds nothing new — leaving it out keeps the change minimal. */
+.title-header .section__title {
+  line-height: 1.2;
+}
+.title-header .section__title::after { content: none; }
 
 .projects__title a {
   color: var(--title-color);
@@ -910,7 +929,8 @@ button:focus-visible {
   .about__container {
     grid-template-columns: 1fr 1.5fr;
     align-items: center;
-    column-gap: 4rem;
+    /* Tightened from 4rem to 2rem — the profile image and bio text now sit closer together instead of in separated columns. The home section's `.home__container { column-gap: 4rem }` (>=1150) is left untouched, so the home layout stays identical. */
+    column-gap: 2rem;
   }
   .about__perfil { margin-inline: 0; }
   .about__data { text-align: initial; }
