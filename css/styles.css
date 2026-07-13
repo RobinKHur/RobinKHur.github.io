@@ -262,30 +262,30 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 /*=============== HOME ===============*/
 .home {
-  padding-top: calc(var(--header-height) + 1rem);
+  padding-top: calc(var(--header-height) + 2rem);
 }
 
 .home__container {
   position: relative;
-  row-gap: 1.25rem;
+  row-gap: 1.5rem;
 }
 
-/* ASCII art sits at the very top of home, hugging the left edge and capped at roughly half the home container width so the name/headline sit to its right */
+/* ASCII art sits at the very top of home, hugging the left edge and scaled so the portrait visually fills roughly half the viewport width on desktop. Font-size is viewport-based so the figure scales with window size. */
 .home__ascii-art {
   text-align: left;
-  margin-top: 0.5rem;
+  margin-top: 1rem;
 }
 
 .home__ascii-art__pre {
   font-family: ui-monospace, "SF Mono", Menlo, Consolas, "Courier New", monospace;
-  font-size: clamp(2px, 0.4vw, 5px);
-  line-height: 0.85;
+  font-size: clamp(4px, 0.55vw, 7px);
+  line-height: 1;
   color: var(--text-color);
   background-color: var(--container-color);
-  padding: 0.25rem 0.5rem;
-  border-radius: 0.5rem;
-  overflow-x: hidden;
-  max-width: min(100%, 560px);
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.75rem;
+  overflow-x: auto;
+  max-width: 100%;
   white-space: pre;
   text-align: left;
   margin: 0;
@@ -293,7 +293,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 .home__data {
   text-align: center;
-  margin-top: 0.5rem;
+  margin-top: 1rem;
 }
 
 .home__name {
@@ -878,7 +878,7 @@ button:focus-visible {
 /* For medium devices */
 @media screen and (min-width: 768px) {
   .home__container {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1.3fr 1fr;
     align-items: start;
     column-gap: 2rem;
   }
@@ -910,10 +910,10 @@ button:focus-visible {
   }
 
   .home__container {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
     align-items: start;
     column-gap: 4rem;
-    padding-block: 4rem 5rem;
+    padding-block: 3rem 5rem;
   }
   .home__name { font-size: var(--biggest-font-size); }
 
