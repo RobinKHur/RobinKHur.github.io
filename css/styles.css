@@ -306,8 +306,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 .home__ascii-art__pre {
   font-family: ui-monospace, "SF Mono", Menlo, Consolas, "Courier New", monospace;
-  /* Sized up another 25% (1.25×) from the previous clamp(6.45px, 0.76vw, 14.06px) → exact math gives 8.0625 / 0.95 / 17.575, written as clamp(8.06px, 0.95vw, 17.58px) below. History of clamps: 22/2.6/48 → 11/1.3/24 → 5.5/0.65/12 → 2.75/0.325/6 → 3.4375/0.40625/7.5 → 5.15625/0.609/11.25 → 6.45/0.76/14.06 → now 8.06/0.95/17.58. Floor 8.06px keeps the figure readable on narrow viewports; 0.95vw scales smoothly; 17.58px ceiling on wide breakpoints. At the ceiling the figure is ≈1439px tall (63 lines × 1.3 × 17.58) — combined with the further-extended `.home { min-height: clamp(875px, 94vh, 1625px) }` and the bottom-fade mask layer, the whole figure still fits within the home section. line-height:1.3 prevents glyph descenders clipping the row above. No max-width on the <pre> — `.home__ascii-art` is the positioning context (inset:0 spans the full section width). */
-  font-size: clamp(8.06px, 0.95vw, 17.58px);
+  /* Reduced 25% (0.75×) from the previous clamp(8.06px, 0.95vw, 17.58px) → exact math gives 6.045 / 0.7125 / 13.185, written as clamp(6.05px, 0.71vw, 13.19px) below. History of clamps: 22/2.6/48 → 11/1.3/24 → 5.5/0.65/12 → 2.75/0.325/6 → 3.4375/0.40625/7.5 → 5.15625/0.609/11.25 → 6.45/0.76/14.06 → 8.06/0.95/17.58 → now 6.05/0.71/13.19. Floor 6.05px keeps the figure visible on narrow viewports; 0.71vw scales smoothly; 13.19px ceiling on wide breakpoints. At the ceiling the figure is ≈1080px tall (63 lines × 1.3 × 13.19) — comfortably inside `.home { min-height: clamp(875px, 75vh, 1625px) }` and well within the bio column, so the bottom-fade mask layer now serves mostly as a soft visual terminus rather than a needed clip. line-height:1.3 prevents glyph descenders clipping the row above. No max-width on the <pre> — `.home__ascii-art` is the positioning context (inset:0 spans the full section width). */
+  font-size: clamp(6.05px, 0.71vw, 13.19px);
   line-height: 1.3;
   color: var(--text-color);
   white-space: pre;
