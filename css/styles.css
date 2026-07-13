@@ -270,39 +270,25 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   row-gap: 1.25rem;
 }
 
-/* ASCII art sits at the very top of home, centred under the fixed header */
+/* ASCII art sits at the very top of home, hugging the left edge and capped at roughly half the home container width so the name/headline sit to its right */
 .home__ascii-art {
-  text-align: center;
-  margin-top: 1rem;
+  text-align: left;
+  margin-top: 0.5rem;
 }
 
 .home__ascii-art__pre {
   font-family: ui-monospace, "SF Mono", Menlo, Consolas, "Courier New", monospace;
-  font-size: clamp(3px, 0.55vw, 7px);
-  line-height: 1;
+  font-size: clamp(2px, 0.4vw, 5px);
+  line-height: 0.85;
   color: var(--text-color);
   background-color: var(--container-color);
-  padding: 1rem 0.75rem;
-  border-radius: 0.75rem;
-  overflow-x: auto;
-  margin: 0 auto;
-  max-width: 100%;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.5rem;
+  overflow-x: hidden;
+  max-width: min(100%, 560px);
   white-space: pre;
   text-align: left;
-}
-
-.home__ascii-art__caption {
-  margin-top: 0.75rem;
-  font-size: var(--smaller-font-size);
-  color: var(--text-color-light);
-  font-style: italic;
-}
-
-.home__ascii-art__caption code {
-  font-size: 0.95em;
-  background-color: var(--body-color);
-  padding: 0 0.25rem;
-  border-radius: 0.25rem;
+  margin: 0;
 }
 
 .home__data {
@@ -897,7 +883,6 @@ button:focus-visible {
     column-gap: 2rem;
   }
   /* ASCII art sits in the left column; name + data in the right column */
-  .home__ascii-art { text-align: left; }
   .home__data { text-align: initial; }
   .home__social { justify-content: flex-start; }
   .home__info { justify-content: flex-start; }
@@ -931,7 +916,6 @@ button:focus-visible {
     column-gap: 4rem;
     padding-block: 4rem 5rem;
   }
-  .home__ascii-art { text-align: left; }
   .home__name { font-size: var(--biggest-font-size); }
 
   .about__container { grid-template-columns: 320px 1fr; column-gap: 4rem; }
