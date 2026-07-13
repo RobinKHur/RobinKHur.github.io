@@ -265,7 +265,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   padding-top: calc(var(--header-height) + 2rem);
   /* Pure white so the ASCII backdrop reads clearly as "not grey" against the body's hsl(0,0%,87%). */
   background-color: #ffffff;
-  /* Clip the absolute ASCII so it never bleeds into the About section. */
+  /* Positioning context for the absolute ASCII art (anchors it to the full window width so the figure touches the left edge), plus clips it so it never bleeds into the About section. */
+  position: relative;
   overflow: hidden;
 }
 
@@ -274,7 +275,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   row-gap: 1.5rem;
 }
 
-/* ASCII self-portrait as a massive faded backdrop that fills the upper row of home. position:absolute + z-index:0 puts it behind the bio block; opacity 0.65 + a right-side mask gradient (full opaque to 22%, mid fade through 58%, fully transparent by 92%) keeps the figure's left half dominant before fading under the bio column so the text reads on top. pointer-events:none so clicks pass through to anything layered above. */
+/* ASCII self-portrait as a faded backdrop that fills the entire home section — anchors to `.home` directly (not `.home__container`) so inset:0 spans the full window width, which is why the figure now touches the left edge. position:absolute + z-index:0 puts it behind the bio block; opacity 0.65 + a right-side mask gradient (full opaque to 22%, mid fade through 58%, fully transparent by 92%) keeps the figure's left half dominant before fading under the bio column so the text reads on top. pointer-events:none so clicks pass through to anything layered above. */
 .home__ascii-art {
   position: absolute;
   inset: 0;
@@ -282,16 +283,14 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   text-align: left;
   pointer-events: none;
   opacity: 0.65;
-  grid-column: 1 / -1;
-  grid-row: 1;
   -webkit-mask-image: linear-gradient(to right, black 22%, rgba(0, 0, 0, 0.55) 58%, transparent 92%);
           mask-image: linear-gradient(to right, black 22%, rgba(0, 0, 0, 0.55) 58%, transparent 92%);
 }
 
 .home__ascii-art__pre {
   font-family: ui-monospace, "SF Mono", Menlo, Consolas, "Courier New", monospace;
-  /* ~4× the previous size (was clamp(6,0.45vw,12) → now scales up to 48px). line-height:1.1 makes each row a bit taller than the natural cell ratio without blowing up total height. No max-width/overflow since the parent now controls the visible window via mask + .home overflow:hidden. */
-  font-size: clamp(22px, 2.6vw, 48px);
+  /* Halved scale (was clamp(22, 2.6vw, 48) per user “reduce ASCII by half” → now 11 / 1.3vw / 24). line-height:1.1 keeps rows a bit taller than the natural cell ratio. No max-width/overflow — `.home` is now the positioning context and trims via overflow:hidden + mask. */
+  font-size: clamp(11px, 1.3vw, 24px);
   line-height: 1.1;
   color: var(--text-color);
   white-space: pre;
@@ -904,7 +903,7 @@ button:focus-visible {
     align-items: start;
     column-gap: 2rem;
   }
-  /* ASCII is now an absolute backdrop behind row 1; pin data to the right column where it sits over the fading art, and pin the scroll-down indicator to a full-width second row. */
+  /* ASCII lives outside `.home__container` now (anchored to `.home`), so the grid here only sees `.home__data` and `.home__scroll`. Data sits in the right column over the fading ASCII. Scroll spans both columns at >=768 but lets the row auto-place — at >=1150 `position: absolute` on `.home__scroll` removes it from flow, so reserving `grid-row: 2` would just leave an empty cell. */
   .home__data {
     grid-column: 2;
     grid-row: 1;
@@ -912,7 +911,6 @@ button:focus-visible {
   }
   .home__scroll {
     grid-column: 1 / -1;
-    grid-row: 2;
   }
   .home__social { justify-content: flex-start; }
 
