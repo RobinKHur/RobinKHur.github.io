@@ -275,7 +275,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   position: relative;
   z-index: 1;
   /* Min-height further extended (1.25×) from the previous clamp(700px, 75vh, 1300px) → clamp(875px, 75vh, 1625px) to keep pace with the latest ASCII font bump. Floor and ceiling scale 1.25× (700 → 875, 1300 → 1625); vh stays at 75 so the home height scales proportionally to viewport on mobile/tablet rather than dominating it. At the ASCII ceiling (17.58px font × 1.3 line-height × 63 lines = ≈1439px pre height) the figure almost fills the 1625px home height; the bottom-fade mask layer terminates the figure softly at the home's bottom edge so any small overflowing residual is invisible. */
-  min-height: clamp(875px, 75vh, 1625px);
+  min-height: clamp(800px, 69vh, 1478px);
 }
 
 .home__container {
