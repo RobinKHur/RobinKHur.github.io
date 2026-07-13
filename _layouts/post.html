@@ -4,7 +4,6 @@ layout: wrapper
 
 <div class="post-view container">
     {%- assign folder_path = page.path | split: "/" | slice: 0, 2 | join: "/" -%}
-    {%- assign image_path = "/" | append: folder_path | append: page['main-image'] -%}
 
 
     <a href="{{ '/' | relative_url }}#projects" class="post-breadcrumb" aria-label="Back to projects">
@@ -13,7 +12,10 @@ layout: wrapper
     </a>
 
     <article class="post-summary">
+        {%- if page['main-image'] and page['main-image'] | strip != '' -%}
+        {%- assign image_path = "/" | append: folder_path | append: page['main-image'] -%}
         <img src="{{ image_path | relative_url }}" alt="{{ page.title }}" loading="lazy">
+        {%- endif -%}
 
         <div class="title-header">
             <h1 class="section__title" style="margin: 0.75rem auto 1rem">

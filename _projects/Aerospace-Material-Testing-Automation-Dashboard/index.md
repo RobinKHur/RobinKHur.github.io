@@ -11,7 +11,7 @@ skills:
   - CSV telemetry logging
   - Environmental chamber automation
   - Aerospace testing workflows (NASA, Lockheed, F-35)
-main-image: /tbd.png
+main-image: ""
 ---
 
 🚀 **Project Overview: Aerospace Material Testing Automation Dashboard**

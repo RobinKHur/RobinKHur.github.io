@@ -13,7 +13,7 @@
     {%- assign page_description = page_description | strip_html | strip_newlines | truncate: 160 -%}
 
     {%- assign og_image = site.profile_image -%}
-    {%- if page.main-image -%}
+    {%- if page['main-image'] and page['main-image'] | strip != '' -%}
         {%- assign folder_path = page.path | split: "/" | slice: 0, 2 | join: "/" -%}
         {%- assign og_image = "/" | append: folder_path | append: page['main-image'] -%}
     {%- endif -%}
