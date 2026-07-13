@@ -1,0 +1,1003 @@
+/*=============== GOOGLE FONTS ===============*/
+@import url("https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@400;500;600;700&display=swap");
+
+/*=============== VARIABLES CSS ===============*/
+:root {
+  --header-height: 3.5rem;
+
+  /*========== Colors ===========*/
+  --first-color: hsl(14, 98%, 50%);
+  --first-color-alt: hsl(14, 98%, 57%);
+  --black-color: hsl(0, 0%, 0%);
+  --black-color-light: hsl(0, 0%, 40%);
+  --white-color: hsl(0, 0%, 95%);
+  --title-color: hsl(0, 0%, 0%);
+  --text-color: hsl(0, 0%, 35%);
+  --text-color-light: hsl(0, 0%, 64%);
+  /* All three color variables resolve to the same pure white (`var(--page-bg)`). The page, sections, navbar, footer, card surfaces (.services__card, .projects__card, .contact__card, .about__perfil, .post-summary, .post-content), and pill-style chips (.services__list-item, .projects__skills li, .post-summary__skills li) all paint against the same surface — that's what removes the visual "page breaks" the user requested. Kept as separate aliases rather than collapsing to a single variable so every existing card/chip declaration stays untouched. */
+  --body-color: var(--page-bg);
+  --container-color: var(--page-bg);
+  --page-bg: hsl(0, 0%, 100%);
+
+  /*========== Font and typography ===========*/
+  --body-font: "Bai Jamjuree", sans-serif;
+  --biggest-font-size: 2.5rem;
+  --h1-font-size: 1.75rem;
+  --h2-font-size: 1.25rem;
+  --h3-font-size: 1.125rem;
+  --normal-font-size: 0.938rem;
+  --small-font-size: 0.813rem;
+  --smaller-font-size: 0.75rem;
+
+  /*========== Font weight ===========*/
+  --font-regular: 400;
+  --font-medium: 500;
+  --font-semi-bold: 600;
+  --font-bold: 700;
+
+  /*========== z index ===========*/
+  --z-tooltip: 10;
+  --z-fixed: 100;
+}
+
+/*========== Responsive typography ===========*/
+@media screen and (min-width: 1150px) {
+  :root {
+    --biggest-font-size: 4.5rem;
+    --h1-font-size: 3rem;
+    --h2-font-size: 1.5rem;
+    --h3-font-size: 1.25rem;
+    --normal-font-size: 1rem;
+    --small-font-size: 0.875rem;
+    --smaller-font-size: 0.813rem;
+  }
+}
+
+/*=============== BASE ===============*/
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--body-font);
+  font-size: var(--normal-font-size);
+  background-color: var(--page-bg);
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4 {
+  color: var(--title-color);
+  font-weight: var(--font-bold);
+}
+
+ul { list-style: none; }
+a { text-decoration: none; color: inherit; }
+img { display: block; max-width: 100%; height: auto; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; }
+
+/*=============== REUSABLE CSS CLASSES ===============*/
+.container {
+  max-width: 1120px;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+.grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.section {
+  padding-block: 4rem 2rem;
+}
+
+.section__title {
+  position: relative;
+  font-size: var(--h1-font-size);
+  width: max-content;
+  margin: 0.75rem auto 2rem;
+  text-align: center;
+}
+
+.section__title span {
+  z-index: 5;
+  position: relative;
+}
+
+.section__title::after {
+  content: "";
+  width: 40px;
+  height: 28px;
+  background-color: hsla(14, 98%, 50%, 0.2);
+  position: absolute;
+  top: -4px;
+  right: -8px;
+}
+
+.geometric-box {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: var(--first-color);
+  rotate: -30deg;
+}
+
+.geometric-box::after {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border: 3px solid var(--black-color);
+  left: -5px;
+  top: -5px;
+}
+
+.main {
+  overflow: hidden;
+}
+
+/*=============== HEADER & NAV ===============*/
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  /* White to match the new --page-bg so there's no color break with the home section underneath. */
+  background-color: var(--page-bg);
+  z-index: var(--z-fixed);
+  /* background-color was removed from the transition shorthand: nav stays white in both default and scrolled states, so animating it was a no-op. Box-shadow still animates the depth cue on `.header.shadow-header`. */
+  transition: box-shadow 0.3s ease;
+}
+
+.header.shadow-header {
+  box-shadow: 0 2px 16px hsla(0, 0%, 0%, 0.1);
+}
+
+.nav {
+  height: var(--header-height);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav__logo {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: var(--font-bold);
+  font-size: var(--h3-font-size);
+  color: var(--title-color);
+  z-index: var(--z-fixed);
+}
+
+.nav__logo-circle {
+  width: 28px;
+  height: 28px;
+  background-color: var(--first-color);
+  border-radius: 50%;
+  position: relative;
+}
+
+.nav__logo-circle::after {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border: 2px solid var(--black-color);
+  border-radius: 50%;
+}
+
+.nav__list {
+  display: flex;
+  gap: 2rem;
+}
+
+.nav__close-item {
+  display: none;
+}
+
+.nav__link {
+  position: relative;
+  color: var(--title-color);
+  font-weight: var(--font-medium);
+  font-size: var(--small-font-size);
+  transition: color 0.3s ease;
+}
+
+.nav__link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0;
+  height: 2px;
+  background-color: var(--first-color);
+  transition: width 0.3s ease;
+}
+
+.nav__link:hover,
+.nav__link.active-link {
+  color: var(--first-color);
+}
+
+.nav__link:hover::after,
+.nav__link.active-link::after {
+  width: 100%;
+}
+
+.nav__link-button {
+  display: inline-flex;
+  align-items: center;
+  border: 2px solid var(--first-color);
+  color: var(--first-color);
+  padding: 0.25rem 0.85rem;
+  border-radius: 0.5rem;
+  font-weight: var(--font-semi-bold);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.nav__link-button::after { display: none; }
+
+.nav__link-button:hover {
+  background-color: var(--first-color);
+  color: var(--white-color);
+}
+
+.nav__buttons {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.nav__menu-btn,
+.nav__close-btn {
+  display: none;
+  font-size: 1.5rem;
+  color: var(--title-color);
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+/*=============== HOME ===============*/
+.home {
+  padding-top: calc(var(--header-height) + 2rem);
+  /* Slight extension so the home section feels less cramped. Note: `.section { padding-block: 4rem 2rem }` already declares bottom padding on this same element, but `.home` is defined later in the stylesheet so this value replaces (not adds to) the section's 2rem. Bumping to 4rem gives a net +2rem of extension across all breakpoints without touching the (>=1150px) `.home__container { padding-block: 3rem 5rem }` which already dominates on large screens. */
+  padding-bottom: 4rem;
+  /* Positioning context for the absolute ASCII art (anchors it to the full window width so the figure touches the left edge). Background inherits from the page (`var(--page-bg)`) so the home section visually flows with body + navbar — no color break.
+     - `z-index: 1` creates a stacking context so the whole section (including the now-overlaid `.home__scroll`) paints above the later-in-DOM `.about`; without it, the scroll button's half-overflowing segment would be hidden behind about's content because about follows `.home` in source order and would otherwise paint last.
+     - `overflow` was changed from `hidden` to `visible` so the absolutely-positioned `.home__scroll` (which extends `translateY(50%)` below `.home`'s bottom edge at >=1150px) can render outside the section box. The ASCII art itself doesn't bleed: it is anchored with `inset: 0` directly to `.home`, so its visible box still equals the section box either way. */
+  position: relative;
+  z-index: 1;
+  /* Min-height floor 875 / ceiling 1625 (vh=75 keeps mobile proportional). At the ASCII ceiling (14.47px font × 1.3 × 63 ≈ 1185.1px pre height) the figure sits with ~440px breathing room under the 1625px ceiling; the bottom-fade mask layer terminates any small overflowing residual softly at the home's bottom edge. */
+  min-height: clamp(875px, 75vh, 1625px);
+}
+
+.home__container {
+  position: relative;
+  row-gap: 1.5rem;
+}
+
+/* ASCII self-portrait as a faded backdrop that fills the entire home section — anchors to `.home` directly (not `.home__container`) so inset:0 spans the full window width, putting the figure flush against the left edge. position:absolute + z-index:0 places it behind the bio block; opacity 0.65 + a right-side mask gradient (full opaque to 7%, mid fade through 16%, fully transparent by 40%) keeps the figure visually anchored to the left before fading away well before the bio column starts.
+
+   Bio column geometry: container max-width 1120px is centered (or fills the viewport on narrower screens), with a 1.5fr/1fr grid + 4rem column gap at >=1150. The bio column starts at ≈57.8–58.8% of the home section width and ends at ≈88.9% (the container's right edge). The 40% transparent stop leaves an 18-20% safe-zone where the figure is fully gradient-transparent before bio text appears — the figure fades "into" the bio text rather than competing behind it.
+
+   - `pointer-events: none` so clicks pass through to anything layered above.
+   - `user-select: none` so dragging the cursor across the figure doesn't highlight the ASCII glyphs — the figure is decorative (`aria-hidden="true"`) and selection is a UX defect. user-select inherits per the CSS UA stylesheet, so the inner .home__ascii-art__pre also can't be highlighted from a parent-level setting. */
+.home__ascii-art {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  text-align: left;
+  pointer-events: none;
+  user-select: none;
+  opacity: 0.65;
+  /* Two mask gradients stacked (stops are % of section height since both anchor to .home__ascii-art inset:0): the horizontal layer fades right from 7% / 16% / 40% to clear the bio column (1.5fr:1fr grid in a centered 1120px container, bio measured ~58-60% of viewport at 1440); the bottom layer fades down from 50% / 80% / 100% so the figure's lower half dissolves softly across the bottom 50% of the home section. Sample points (with figure opacity 0.65): α(50%) = 1.0 ⇒ 65% effective; α(80%) = 0.5 ⇒ 32.5% effective; α(100%) = 0 ⇒ 0. The 3-stop curve gives a smoother fade-out than a single 2-stop linear would. CSS `mask-image` with multiple comma-separated layers intersects them — the figure is visible only where BOTH layers are opaque, giving roughly a top-left rectangle with a soft right edge and a soft bottom edge. The -webkit- and unprefixed entries must stay in lockstep.
+
+     Stops are chosen to leave the bio column completely figure-free: at x = 40% (transparent stop), alpha reaches 0 — bio column starts at ~58-60% of viewport, so an ~18-20% safe-zone of fully gradient-transparent space precedes any bio text.     The figure renders at its full 0.65 element opacity only up to 7%; past that the mask alpha decreases, leaving a long, soft fade tail. Linear interpolation:
+       - between 16% (α=0.55) and 40% (α=0): alpha = 0.55 × (40 − x) / (40 − 16) for 16% ≤ x ≤ 40%.
+       - at x = 40%: alpha = 0 (clean exit).
+       - at x = 28%: alpha = 0.55 × 12/24 = 0.275, and visible after .home__ascii-art opacity 0.65 ⇒ ~17.9% effective.
+       - at x = 34%: alpha = 0.55 × 6/24 ≈ 0.1375, ⇒ ~8.9% effective — hairline.
+     The bio column starts at ~58-60% of viewport, giving ~18-20% safe-zone of fully transparent gradient before any bio text appears. */
+  -webkit-mask-image: linear-gradient(to right, black 7%, rgba(0, 0, 0, 0.55) 16%, transparent 40%),
+                      linear-gradient(to bottom, black 50%, rgba(0, 0, 0, 0.5) 80%, transparent 100%);
+          mask-image: linear-gradient(to right, black 7%, rgba(0, 0, 0, 0.55) 16%, transparent 40%),
+                      linear-gradient(to bottom, black 50%, rgba(0, 0, 0, 0.5) 80%, transparent 100%);
+}
+
+.home__ascii-art__pre {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, "Courier New", monospace;
+  /* clamp(4.14px, 0.665vw, 14.47px) — at 1440 renders ~53.5% of viewport (134 chars × 0.6 ratio × 9.576px ≈ 770.2px). Asserted computed sizes at common viewports: 1440→9.576px (≈53.5%), 1920→12.768px, 1200→7.98px, 1024→6.81px, 768→5.107px, 375→2.494..4.14px floor takes over below ≈622 viewport). Proportional ~53.5% width holds across breakpoints within the floor/ceiling. line-height:1.3 prevents glyph descenders clipping the row above. No max-width on the <pre> — `.home__ascii-art` is the positioning context (inset:0 spans the full section width). */
+
+  font-size: clamp(4.14px, 0.665vw, 14.47px);
+  line-height: 1.3;
+  color: var(--text-color);
+  white-space: pre;
+  text-align: left;
+  margin: 0;
+}
+
+.home__data {
+  position: relative;
+  /* Sits at z-index 2 over the ASCII backdrop. No background wash — the right-fade mask gradient on `.home__ascii-art` already leaves the right column clean enough for the text to read, and the wash would have hidden that natural fade-onto-white effect. */
+  z-index: 2;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.home__name {
+  font-size: var(--biggest-font-size);
+  line-height: 1.1;
+  margin-bottom: 0.5rem;
+}
+
+.home__tagline {
+  font-size: var(--h2-font-size);
+  font-weight: var(--font-regular);
+  color: var(--text-color);
+  line-height: 1.6;
+  max-width: 480px;
+  margin-bottom: 1rem;
+}
+
+.home__tagline-role {
+  font-weight: var(--font-bold);
+  color: var(--first-color);
+}
+
+.home__social {
+  display: flex;
+  justify-content: center;
+  column-gap: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.home__social-link {
+  font-size: 1.5rem;
+  color: var(--title-color);
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.home__social-link:hover {
+  color: var(--first-color);
+  transform: translateY(-3px);
+}
+
+.home__button,
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: var(--first-color);
+  color: var(--white-color);
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.5rem;
+  font-weight: var(--font-semi-bold);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  font-family: inherit;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.home__button:hover,
+.button:hover {
+  background-color: var(--first-color-alt);
+  transform: translateY(-2px);
+}
+
+.button-ghost {
+  background-color: transparent;
+  color: var(--first-color);
+  border: 1px solid var(--first-color);
+}
+
+.button-ghost:hover {
+  background-color: var(--first-color);
+  color: var(--white-color);
+}
+
+/* Scroll-down now uses an SVG arrow from the Rian reference instead of CSS animation */
+.home__scroll {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 2rem auto 0;
+  color: var(--title-color);
+  font-weight: var(--font-medium);
+  font-size: var(--small-font-size);
+  text-align: center;
+}
+
+.home__scroll-img {
+  width: 36px;
+  height: auto;
+  aspect-ratio: 53 / 68;
+  transition: transform 0.4s ease;
+  animation: scroll-bounce 2s ease infinite;
+}
+
+.home__scroll:hover .home__scroll-img {
+  transform: translateY(4px);
+}
+
+@keyframes scroll-bounce {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(6px); }
+}
+
+/*=============== ABOUT ===============*/
+.about__container { row-gap: 2.5rem; }
+
+/* Square crop (was 50% circle) — soft square as the user asked */
+.about__perfil {
+  width: 220px;
+  height: 220px;
+  background-color: var(--container-color);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  margin-inline: auto;
+}
+
+.about__perfil img { width: 100%; height: 100%; object-fit: cover; }
+
+.about__data { text-align: center; }
+
+/* The new simpler About column: bio paragraph only (no count boxes, no CV button) */
+.about__data--simple {
+  margin-top: 0.5rem;
+}
+
+.about__description {
+  margin-bottom: 0;
+  color: var(--text-color);
+  line-height: 1.7;
+}
+
+/*=============== SERVICES ===============*/
+.services__container {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.services__card {
+  background-color: var(--container-color);
+  padding: 2rem 1.5rem;
+  border-radius: 1rem;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.services__card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px hsla(0, 0%, 0%, 0.12);
+}
+
+.services__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 0.75rem;
+  background-color: var(--first-color);
+  color: var(--white-color);
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+}
+
+.services__title {
+  font-size: var(--h2-font-size);
+  margin-bottom: 0.5rem;
+}
+
+.services__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.services__list-item {
+  background-color: var(--body-color);
+  /* Light border restores a visible pill silhouette now that the previous grey background is gone — chip structure wouldn't otherwise read. Border color picked as hsl(0,0%,85%) so on the white card surface it reads as a hairline, not a heavy outline. */
+  border: 1px solid hsl(0, 0%, 85%);
+  color: var(--title-color);
+  border-radius: 0.5rem;
+  padding: 0.25rem 0.75rem;
+  font-size: var(--smaller-font-size);
+  font-weight: var(--font-medium);
+}
+
+/*=============== PROJECTS ===============*/
+.projects__container {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.projects__card {
+  position: relative;
+  background-color: var(--container-color);
+  border-radius: 1rem;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.projects__card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px hsla(0, 0%, 0%, 0.12);
+}
+
+.projects__image {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  display: block;
+  text-decoration: none;
+}
+
+.projects__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.projects__card:hover .projects__image img {
+  transform: scale(1.05);
+}
+
+.projects__button {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  background-color: var(--first-color);
+  color: var(--white-color);
+  border-radius: 50%;
+  font-size: 1.25rem;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  text-decoration: none;
+}
+
+.projects__button:hover {
+  background-color: var(--first-color-alt);
+  transform: scale(1.05);
+}
+
+.projects__content {
+  padding: 1.25rem 1.5rem 1.5rem;
+}
+
+.projects__subtitle {
+  font-size: var(--smaller-font-size);
+  color: var(--text-color-light);
+  font-weight: var(--font-medium);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.25rem;
+}
+
+.projects__title {
+  font-size: var(--h2-font-size);
+  margin-bottom: 0.5rem;
+  /* Long titles (e.g. "Aerospace Material Testing Automation Dashboard" — ~50 chars; peptide research title is ~92 chars) wrap on the narrow 3-col layout at >=1150px. Without these, very long unhyphenatable strings can overflow the card horizontally. line-height:1.4 keeps 2-3 line stacks readable without cramping glyphs. h3 inherits the body's line-height:1.6 by default — explicit 1.4 trims the title block slightly. */
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
+  line-height: 1.4;
+}
+
+.projects__title a {
+  color: var(--title-color);
+  text-decoration: none;
+}
+
+.projects__title a:hover { color: var(--first-color); }
+
+.projects__description {
+  color: var(--text-color);
+  margin-bottom: 1rem;
+  font-size: var(--small-font-size);
+}
+
+.projects__skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.projects__skills li {
+  background-color: var(--body-color);
+  /* Light border restores pill silhouette now that the previous grey background is gone. Border color picked as hsl(0,0%,85%) so on the white card surface it reads as a hairline, not a heavy outline. */
+  border: 1px solid hsl(0, 0%, 85%);
+  color: var(--title-color);
+  border-radius: 0.5rem;
+  padding: 0.25rem 0.75rem;
+  font-size: var(--smaller-font-size);
+  font-weight: var(--font-medium);
+}
+
+/*=============== CONTACT ===============*/
+.contact { position: relative; }
+
+.contact__deco {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 120px;
+  height: 180px;
+  opacity: 0.32;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.contact__container {
+  position: relative;
+  z-index: 1;
+  row-gap: 2rem;
+}
+
+.contact__info {
+  display: grid;
+  gap: 1rem;
+}
+
+.contact__card {
+  background-color: var(--container-color);
+  padding: 1.25rem;
+  border-radius: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  text-align: left;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact__card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px hsla(0, 0%, 0%, 0.1);
+}
+
+.contact__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 0.75rem;
+  background-color: var(--first-color);
+  color: var(--white-color);
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.contact__label {
+  font-size: var(--smaller-font-size);
+  /* Bumped from --text-color-light (64%) to --text-color (35%) so the small uppercase label stays above WCAG AA contrast on the now-white contact card. */
+  color: var(--text-color);
+  font-weight: var(--font-medium);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.contact__value {
+  font-size: var(--normal-font-size);
+  color: var(--title-color);
+  font-weight: var(--font-semi-bold);
+  word-break: break-word;
+}
+
+.contact__socials {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.contact__social-link {
+  display: inline-grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--container-color);
+  color: var(--title-color);
+  font-size: 1.1rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.contact__social-link:hover {
+  background-color: var(--first-color);
+  color: var(--white-color);
+}
+
+/*=============== FOOTER ===============*/
+.footer {
+  /* White to match the rest of the page so the bottom of the site flows without a color break. */
+  background-color: var(--page-bg);
+  padding-block: 2rem 1.5rem;
+  text-align: center;
+}
+
+.footer__container { row-gap: 1.25rem; }
+
+.footer__links {
+  display: flex;
+  justify-content: center;
+  column-gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.footer__link {
+  color: var(--title-color);
+  font-weight: var(--font-medium);
+  font-size: var(--small-font-size);
+  transition: color 0.3s ease;
+}
+
+.footer__link:hover { color: var(--first-color); }
+
+.footer__copy {
+  font-size: var(--smaller-font-size);
+  /* Bumped from --text-color-light (64%) to --text-color (35%) because the footer is now white: the previous 4.4:1 contrast at 0.75rem was just below WCAG AA, and darkening to ~8:1 keeps small footer text comfortably legible without making it visually loud. */
+  color: var(--text-color);
+}
+
+/*=============== SCROLL UP ===============*/
+.scrollup {
+  position: fixed;
+  right: 1.5rem;
+  bottom: -30%;
+  background-color: var(--first-color);
+  color: var(--white-color);
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  font-size: 1.25rem;
+  z-index: var(--z-tooltip);
+  opacity: 0;
+  transition: bottom 0.4s ease, opacity 0.4s ease, background-color 0.3s ease;
+  text-decoration: none;
+}
+
+.scrollup:hover { background-color: var(--first-color-alt); }
+
+.scrollup.show-scroll { bottom: 2rem; opacity: 1; }
+
+/*=============== SKIP LINK / A11Y ===============*/
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--first-color);
+  color: var(--white-color);
+  padding: 0.5rem 1rem;
+  z-index: 9999;
+  font-weight: var(--font-semi-bold);
+  transition: top 0.15s ease;
+  border-radius: 0 0 0.5rem 0;
+  text-decoration: none;
+}
+
+.skip-link:focus { top: 0; }
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--first-color);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/*=============== POST (project detail page) ===============*/
+.post-breadcrumb {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: var(--small-font-size);
+  /* Bumped from --text-color-light (64%) to --text-color (35%) so the small breadcrumb link stays above WCAG AA contrast on white. */
+  color: var(--text-color);
+  text-decoration: none;
+  margin-bottom: 0.75rem;
+  transition: color 0.3s ease;
+}
+
+.post-breadcrumb:hover { color: var(--first-color); }
+
+.post-view { padding-top: calc(var(--header-height) + 2rem); }
+
+.post-summary {
+  background-color: var(--container-color);
+  padding: 2rem;
+  border-radius: 1rem;
+  margin-bottom: 2rem;
+}
+
+.post-summary img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.post-summary h1 {
+  font-size: var(--h1-font-size);
+  margin-bottom: 1rem;
+}
+
+.post-summary__description,
+.post-content {
+  color: var(--text-color);
+  margin-bottom: 1rem;
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
+  hyphens: auto;
+}
+
+.post-summary__skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.post-summary__skills li {
+  background-color: var(--body-color);
+  /* Light border restores pill silhouette now that the previous grey background is gone. Border color picked as hsl(0,0%,85%) so on the white card surface it reads as a hairline, not a heavy outline. */
+  border: 1px solid hsl(0, 0%, 85%);
+  color: var(--title-color);
+  border-radius: 0.5rem;
+  padding: 0.25rem 0.75rem;
+  font-size: var(--smaller-font-size);
+  font-weight: var(--font-medium);
+}
+
+.post-content {
+  background-color: var(--container-color);
+  padding: 2rem;
+  border-radius: 1rem;
+}
+
+.post-content a {
+  color: var(--first-color);
+  font-weight: var(--font-semi-bold);
+}
+
+.post-content a:hover { text-decoration: underline; }
+
+.not-found { text-align: center; padding: 4rem 1rem; }
+
+.not-found h1 {
+  font-size: var(--biggest-font-size);
+  margin-bottom: 0.5rem;
+  color: var(--first-color);
+}
+
+/*=============== BREAKPOINTS ===============*/
+/* Mobile menu (<=1150px) */
+@media screen and (max-width: 1150px) {
+  .nav__menu-btn { display: inline-flex; }
+
+  .nav__close-item {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .nav__close-btn {
+    display: inline-flex;
+    position: absolute;
+    top: 1.25rem;
+    right: 1.25rem;
+  }
+
+  .nav__list {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 80%;
+    max-width: 320px;
+    height: 100vh;
+    /* White to match the page + top nav so opening the mobile drawer doesn't introduce a grey band beneath the (now white) navbar. */
+    background-color: var(--page-bg);
+    flex-direction: column;
+    padding: 6rem 2rem 2rem;
+    gap: 1.5rem;
+    transition: right 0.4s ease;
+    box-shadow: -2px 0 16px hsla(0, 0%, 0%, 0.15);
+  }
+  .nav__list.show-menu { right: 0; }
+
+  .nav__link { font-size: var(--h3-font-size); }
+}
+
+/* For small devices — bio block sits below the ASCII not beside it, so the bottom edge of the backdrop fades instead of the right edge that desktop uses. Stops chosen so the bio block is completely figure-free: at x = 30% (transparent stop), alpha reaches 0 — bio block top sits at ~39% of section height (figure pre-height at floor font 4.14 × 1.3 × 63 = 339.1px in a 875px section), so an ~9% safe-zone of fully gradient-transparent space precedes any bio text. Figure renders at its full 0.65 element opacity only up to 10%; past that the mask alpha decreases — same fade curve shape as desktop but mirrored vertically. */
+@media screen and (max-width: 767px) {
+  .home__ascii-art {
+    -webkit-mask-image: linear-gradient(to bottom, black 10%, rgba(0, 0, 0, 0.55) 20%, transparent 30%);
+            mask-image: linear-gradient(to bottom, black 10%, rgba(0, 0, 0, 0.55) 20%, transparent 30%);
+  }
+}
+
+/* For medium devices */
+@media screen and (min-width: 768px) {
+  .home__container {
+    grid-template-columns: 1.3fr 1fr;
+    align-items: start;
+    column-gap: 2rem;
+  }
+  /* ASCII lives outside `.home__container` now (anchored to `.home`), so the grid here only sees `.home__data` and `.home__scroll`. Data sits in the right column over the fading ASCII. Scroll spans both columns at >=768 but lets the row auto-place — at >=1150 `position: absolute` on `.home__scroll` removes it from flow, so reserving `grid-row: 2` would just leave an empty cell. */
+  .home__data {
+    grid-column: 2;
+    grid-row: 1;
+    text-align: initial;
+  }
+  .home__scroll {
+    grid-column: 1 / -1;
+  }
+  .home__social { justify-content: flex-start; }
+
+  .about__container {
+    grid-template-columns: 1fr 1.5fr;
+    align-items: center;
+    column-gap: 4rem;
+  }
+  .about__perfil { margin-inline: 0; }
+  .about__data { text-align: initial; }
+
+  .contact__container {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+}
+
+/* For large devices */
+@media screen and (min-width: 1150px) {
+  .container { padding-inline: 0; }
+  .nav { height: calc(var(--header-height) + 1rem); }
+
+  /* The `padding-top` and `background` declarations from base .home already apply here — the old re-declaration was a no-op left from earlier revisions and gets dropped. */
+
+  .home__container {
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+    align-items: start;
+    column-gap: 4rem;
+    padding-block: 3rem 5rem;
+  }
+  .home__name { font-size: var(--biggest-font-size); }
+
+  .about__container { grid-template-columns: 320px 1fr; column-gap: 4rem; }
+  .about__perfil { width: 320px; height: 320px; }
+
+  .services__container { grid-template-columns: repeat(3, 1fr); }
+
+  /* 3-col projects grid (user-requested change) */
+  .projects__container { grid-template-columns: repeat(3, 1fr); }
+
+  .footer__container { padding-inline: 1.5rem; }
+
+  /* The scroll-down indicator straddles the seam between home and about at large screens, firmly anchored on the RIGHT edge of the page (`right: 1rem` — a small gutter from the right edge so it doesn't sit flush against the viewport). `bottom: 0` anchors it to .home's bottom edge; `transform: translateY(50%)` (no X component since `right` already establishes the horizontal position) shifts it down by half its height so the upper half sits inside home and the lower half visually overlays about's top region. `.home` has `z-index: 1` (its own stacking context) so this half-overflowing segment stays visible instead of being hidden behind about's first row. `z-index: 5` keeps it above .home__ascii-art (0) and .home__data (2). */
+  .home__scroll {
+    position: absolute;
+    bottom: 0;
+    right: 1rem;
+    transform: translateY(50%);
+    z-index: 5;
+    margin: 0;
+  }
+}
