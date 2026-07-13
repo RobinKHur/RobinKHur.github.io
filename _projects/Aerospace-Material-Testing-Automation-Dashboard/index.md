@@ -1,15 +1,16 @@
 ---
 layout: post
 title: Aerospace Material Testing Automation Dashboard
+category: Software
 description: Built a desktop automation app that integrates dual Alicat mass-flow controllers and a high-accuracy digital THProbe into a closed-loop humidity chamber for advanced aerospace materials testing. Dynamically regulates dry/humidified gas mixing via serial communication, holds steady-state humidity during long-duration test cycles without manual intervention, charts live conditions in real-time, and logs audit-grade telemetry to CSV — supporting research workflows tied to NASA, Lockheed Martin, and the F-35 Lightning II program.
 skills:
-  - Industrial instrument integration (Alicat mass-flow controllers, digital THProbe, water bubbler)
-  - Serial communication & instrument-level device control
-  - Closed-loop feedback control / PID-style regulation
-  - Real-time data acquisition & environmental monitoring
-  - CSV telemetry logging and audit-grade data archival
-  - High-precision environmental chamber automation
-  - Aerospace & defense materials testing workflows (NASA, Lockheed Martin, F-35)
+  - Industrial instrument integration
+  - Serial communication & device control
+  - Closed-loop PID control
+  - Real-time data acquisition
+  - CSV telemetry logging
+  - Environmental chamber automation
+  - Aerospace testing workflows (NASA, Lockheed, F-35)
 main-image: /tbd.png
 ---
 

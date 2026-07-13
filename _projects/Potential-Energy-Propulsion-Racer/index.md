@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Potential Energy Propulsion Racer
+category: Modeling and Design
 description: Designed and fabricated a spring-powered 3D-printed racing vehicle for competitive obstacle course navigation. Led iterative CAD development, mechanical optimization, and testing to maximize performance under strict material and dimensional constraints.
 skills: 
   - SolidWorks CAD

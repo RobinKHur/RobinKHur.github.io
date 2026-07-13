@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Xylem Filtration System
+category: Modeling and Design
 description: Led development of a biodegradable, low-cost water filtration system using natural plant xylem to remove harmful bacteria for outdoor use. Designed and tested prototypes through iterative CAD modeling, fabrication, and laboratory bacterial analysis to create an eco-friendly alternative to commercial filters.
 skills: 
   - CAD design & FEA (SolidWorks)
