@@ -274,8 +274,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
      - `overflow` was changed from `hidden` to `visible` so the absolutely-positioned `.home__scroll` (which extends `translateY(50%)` below `.home`'s bottom edge at >=1150px) can render outside the section box. The ASCII art itself doesn't bleed: it is anchored with `inset: 0` directly to `.home`, so its visible box still equals the section box either way. */
   position: relative;
   z-index: 1;
-  /* Min-height further extended (1.25×) from the previous clamp(700px, 75vh, 1300px) → clamp(875px, 75vh, 1625px) to keep pace with the latest ASCII font bump. Floor and ceiling scale 1.25× (700 → 875, 1300 → 1625); vh stays at 75 so the home height scales proportionally to viewport on mobile/tablet rather than dominating it. At the ASCII ceiling (17.58px font × 1.3 line-height × 63 lines = ≈1439px pre height) the figure almost fills the 1625px home height; the bottom-fade mask layer terminates the figure softly at the home's bottom edge so any small overflowing residual is invisible. */
-  min-height: clamp(875px, 75vh, 1625px);
+  /* Min-height further extended (1.25×) from the previous clamp(875px, 75vh, 1625px) → clamp(1094px, 75vh, 2031px) to keep pace with the latest ASCII font bump. Floor and ceiling scale 1.25× (875 → 1094, 1625 → 2031); vh stays at 75 so the home height scales proportionally to viewport on mobile/tablet rather than dominating it. At the ASCII ceiling (18.09px font × 1.3 line-height × 63 lines ≈ 1482px pre height) sits with ~550px of breathing room under the 2031px home ceiling; the bottom-fade mask layer terminates the figure softly at the home's bottom edge so any small overflowing residual is invisible. */
+  min-height: clamp(1094px, 75vh, 2031px);
 }
 
 .home__container {
@@ -297,17 +297,23 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   pointer-events: none;
   user-select: none;
   opacity: 0.65;
-  /* Two mask gradients stacked: the horizontal layer fades right from 14% / 35% / 55% to clear the bio column (1.5fr:1fr grid in a centered 1120px container); the bottom layer fades down from 60%/100% so the figure ends smoothly at the bottom of the home section instead of being clipped against whatever comes below. CSS `mask-image` with multiple comma-separated layers intersects them — the figure is visible only where BOTH layers are opaque, giving roughly a top-left rectangle with a soft right edge and a soft bottom edge. The -webkit- and unprefixed entries must stay in lockstep. */
-  -webkit-mask-image: linear-gradient(to right, black 14%, rgba(0, 0, 0, 0.55) 35%, transparent 55%),
+  /* Two mask gradients stacked: the horizontal layer fades right from 10% / 22% / 50% to clear the bio column (1.5fr:1fr grid in a centered 1120px container, bio starts ~58% of viewport at 1440 — measured); the bottom layer fades down from 60%/100% so the figure ends smoothly at the bottom of the home section instead of being clipped against whatever comes below. CSS `mask-image` with multiple comma-separated layers intersects them — the figure is visible only where BOTH layers are opaque, giving roughly a top-left rectangle with a soft right edge and a soft bottom edge. The -webkit- and unprefixed entries must stay in lockstep.
+
+     Pulled inward from the prior 14/35/55 stops because the 1.25× font bump made the residual ~0-9% alpha in the 50-55% tail (bio measured ~58-60% of viewport at 1440) reach just before the bio column noticeably. Linear interpolation:
+       - between the 0.55 (at 22%) and the 0 (at 50%) stops, alpha = 0.55 × (50 − x) / (50 − 22) for 22% ≤ x ≤ 50%.
+       - at x = 50%: alpha = 0 (clean exit before bio at ~58-60%).
+       - at x = 44%: alpha = 0.55 × 6/28 ≈ 0.118, and visible after .home__ascii-art opacity 0.65 ⇒ ~7.6% effective — already a hairline, well below the prior reading threshold.
+     The 10% opaque-start keeps the figure visually anchored to the left edge where it reads strongest, while still fading across ~40% of viewport (50% − 10%) before becoming transparent. */
+  -webkit-mask-image: linear-gradient(to right, black 10%, rgba(0, 0, 0, 0.55) 22%, transparent 50%),
                       linear-gradient(to bottom, black 60%, transparent 100%);
-          mask-image: linear-gradient(to right, black 14%, rgba(0, 0, 0, 0.55) 35%, transparent 55%),
+          mask-image: linear-gradient(to right, black 10%, rgba(0, 0, 0, 0.55) 22%, transparent 50%),
                       linear-gradient(to bottom, black 60%, transparent 100%);
 }
 
 .home__ascii-art__pre {
   font-family: ui-monospace, "SF Mono", Menlo, Consolas, "Courier New", monospace;
-  /* Third pass at "in between the past and current ASCII sizes" — the second pass (4.27 / 0.62 / 12.945, the literal midpoint of the past smaller 4.54/0.53/9.89 and the larger past target 4/0.71/16) resolved to ≈49.9% of viewport at 1440, only ~1.4% off the prior 49.9%-ish step, which the user read as "no change". This pass takes the **larger past target** (clamp(4px, 0.71vw, 16px), at ≈57.1% at 1440) and the **current** (clamp(4.27px, 0.62vw, 12.945px), at ≈49.9% at 1440) as the two endpoints of the new midpoint. Literal midpoints (no upward rounding): floor = (4 + 4.27) / 2 = 4.135; vw = (0.71 + 0.62) / 2 = 0.665; ceiling = (16 + 12.945) / 2 = 14.4725. `clamp(4.14px, 0.665vw, 14.47px)` produces a 53.9% figure at 1440 — a visible ~4% bump above the previous 49.9% step and ~3% under the past 57.1% target. At 1440: 0.665 × 14.4 = 9.576px font → 134 × 0.6 × 9.576 ≈ 770.4px = 53.5%; at 1920: 12.768px → 1027.4px → 53.5%; at 1024: 6.81px → 547.6px → 53.5%. The figure scales linearly with viewport (within the floor/ceiling), so the proportional width stays at 53.5% across breakpoints — visually distinct from both endpoints. Asserted computed sizes: 1440→9.576px, 1200→7.98px, 768→5.107px, 375→2.494px (floor 4.14 takes precedence below ~622 viewport). History of clamps: 22/2.6/48 → 11/1.3/24 → 5.5/0.65/12 → 2.75/0.325/6 → 3.4375/0.40625/7.5 → 5.15625/0.609/11.25 → 6.45/0.76/14.06 → 8.06/0.95/17.58 → 6.05/0.71/13.19 → 4.54/0.53/9.89 → 4/0.71/16 → 4.5/0.62/13 → 4.27/0.62/12.945 → now 4.14/0.665/14.47. line-height:1.3 prevents glyph descenders clipping the row above. No max-width on the <pre> — `.home__ascii-art` is the positioning context (inset:0 spans the full section width). */
-  font-size: clamp(4.14px, 0.665vw, 14.47px);
+  /* Fourth pass: the user asked for a 25% bump from the current clamp(4.14px, 0.665vw, 14.47px). Three new values are produced by multiplying each axis of the current clamp by 1.25 (no rounding-up) so the proportional scale is preserved: floor = 4.14 × 1.25 = 5.175; vw = 0.665 × 1.25 = 0.83125; ceiling = 14.47 × 1.25 = 18.0875. `clamp(5.18px, 0.831vw, 18.09px)` produces a ≈66.8% figure width at 1440 — a clean +25% scale of the prior 53.5% step (1.25 × 53.5 ≈ 66.9%). Asserted computed font sizes at common viewports: 1440→11.9664px ≈ 11.965 (134 × 0.6 × 11.9664 ≈ 962.1px → 962/1440 ≈ 66.8% width), 1920→15.9552px, 1200→9.972px, 1024→8.5094px ≈ 8.507, 768→6.3821px, 375→3.116..5.18px (the 5.18 floor takes precedence below ≈623 viewport). The figure scales linearly with viewport (within the floor/ceiling), so the proportional ~66.8% width holds across breakpoints — a clean 1.25× of the prior step rather than another midpoint guess. History of clamps: 22/2.6/48 → 11/1.3/24 → 5.5/0.65/12 → 2.75/0.325/6 → 3.4375/0.40625/7.5 → 5.15625/0.609/11.25 → 6.45/0.76/14.06 → 8.06/0.95/17.58 → 6.05/0.71/13.19 → 4.54/0.53/9.89 → 4/0.71/16 → 4.5/0.62/13 → 4.27/0.62/12.945 → 4.14/0.665/14.47 → now 5.18/0.831/18.09 (×1.25 of the prior step). line-height:1.3 prevents glyph descenders clipping the row above. No max-width on the <pre> — `.home__ascii-art` is the positioning context (inset:0 spans the full section width). */
+  font-size: clamp(5.18px, 0.831vw, 18.09px);
   line-height: 1.3;
   color: var(--text-color);
   white-space: pre;
@@ -916,11 +922,12 @@ button:focus-visible {
 
 /* For small devices — the bio block sits below the ASCII not beside it, so fade the
    bottom edge of the backdrop instead of the right edge that desktop uses.
-   Stops mirror the tightened desktop intent: opaque top, full fade-out before the bio sits. */
+   Stops mirror the tightened desktop intent: opaque top, full fade-out before the bio sits.
+   Pulled inward from 22/58/92 → 12/22/32 because at the floor font size (5.18px) on a 375×812 viewport the .home min-height is 1094px (clamp floor) while the figure pre-height is 5.18 × 1.3 × 63 ≈ 424.2px ≈ 38.8% of section height. So the bio block sits on top from ~39% downward. The prior 92% transparent-stop left the figure ~78% opaque at the bio's top edge (interpolated alpha at 39% between 22% stop alpha 1 and 58% stop alpha 0.55: 1 − 0.472 × 0.45 ≈ 0.788 → ~51% effective after the 0.65 element opacity) — heavy bleed. New 12/22/32 stops put the figure fully transparent at 32% of section height — a 7% buffer above the bio block top — while keeping the figure dominant on the top 12% of the section. */
 @media screen and (max-width: 767px) {
   .home__ascii-art {
-    -webkit-mask-image: linear-gradient(to bottom, black 22%, rgba(0, 0, 0, 0.55) 58%, transparent 92%);
-            mask-image: linear-gradient(to bottom, black 22%, rgba(0, 0, 0, 0.55) 58%, transparent 92%);
+    -webkit-mask-image: linear-gradient(to bottom, black 12%, rgba(0, 0, 0, 0.55) 22%, transparent 32%);
+            mask-image: linear-gradient(to bottom, black 12%, rgba(0, 0, 0, 0.55) 22%, transparent 32%);
   }
 }
 
