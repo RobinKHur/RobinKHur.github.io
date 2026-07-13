@@ -1,32 +1,21 @@
 ---
-permalink: /404.html
 layout: wrapper
+permalink: /404.html
+title: Page Not Found
+description: The page you were looking for could not be found.
 ---
 
-<style type="text/css" media="screen">
-  .container {
-    min-height: 80vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 20px;
-}
+<section class="not-found section" style="padding-top: calc(var(--header-height) + 4rem)">
+    <h1 class="section__title">
+        <span>404</span>
+        <span class="geometric-box"></span>
+    </h1>
 
-.container h1 {
-    font-size: 6rem;
-    margin-bottom: 1rem;
-}
+    <p><strong>Page not found.</strong></p>
+    <p style="margin-bottom: 2rem">The page you were looking for doesn't exist or has been moved.</p>
 
-.container p {
-    font-size: 1.25rem;
- }
-</style>
-
-<div class="container">
-  <h1>404</h1>
-
-  <p><strong>Page not found :(</strong></p>
-  <p>The requested page could not be found.</p>
-</div>
+    <a href="{{ '/' | relative_url }}" class="button">
+        <i class="ri-arrow-left-line" aria-hidden="true"></i>
+        Back to home
+    </a>
+</section>
