@@ -168,9 +168,9 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* Bring navbar text close to window borders: span the full viewport width instead of sitting inside the centered 1120px container (which leaves ~160px of empty space from viewport edge to nav content at >=1150px). Tight 0.75rem side padding keeps a small touch-target margin without padding-out the brand/links. The override has specificity (0,2,0) and beats `.container { max-width: 1120px }` and `.container { padding-inline: 0 }` inside the (>=1150px) media block — so this rule governs the navbar at every viewport width and the rest of the page still uses the centered container layout. */
+  /* Keep navbar text close to window borders — span the full viewport width instead of sitting inside the centered 1120px container (which leaves ~160px of empty space from viewport edge to nav content at >=1150px). 1.25rem side padding gives the nav elements a touch more breathing room from the viewport edge without padding-out the brand/links. Wins at small viewports via source order over the base `.container` rule; at >=1150px, padding-inline is re-declared on `.nav` inside the media block so it wins over `.container { padding-inline: 0 }`, governing the navbar at every viewport width while the rest of the page keeps the centered container layout. */
   max-width: 100%;
-  padding-inline: 0.75rem;
+  padding-inline: 1.25rem;
 }
 
 .nav__logo {
@@ -944,7 +944,11 @@ button:focus-visible {
 /* For large devices */
 @media screen and (min-width: 1150px) {
   .container { padding-inline: 0; }
-  .nav { height: calc(var(--header-height) + 1rem); }
+  .nav {
+    height: calc(var(--header-height) + 1rem);
+    /* Re-declare padding-inline here to beat `.container { padding-inline: 0 }` (declared just above) at >=1150px — same (0,1,0) specificity, this rule wins by source order within the media block. The base .nav { padding-inline: 1.25rem } rule is in turn overridden by the media's .container rule because that media rule comes later in the file, so without this re-declaration the desktop navbar would sit flush against the viewport edges (padding-inline: 0). */
+    padding-inline: 1.25rem;
+  }
 
   /* The `padding-top` and `background` declarations from base .home already apply here — the old re-declaration was a no-op left from earlier revisions and gets dropped. */
 
