@@ -5,9 +5,6 @@
     {%- assign image_path = "/" | append: folder_path | append: item['main-image'] -%}
     <a href="{{ item.url }}" class="projects__image" aria-label="View project: {{ item.title }}">
         <img src="{{ image_path | relative_url }}" alt="{{ item.title }}" loading="lazy">
-        <span class="projects__button">
-            <i class="ri-arrow-right-up-line" aria-hidden="true"></i>
-        </span>
     </a>
     {%- endif -%}
 

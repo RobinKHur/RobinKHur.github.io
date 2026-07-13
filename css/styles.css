@@ -536,27 +536,6 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   transform: scale(1.05);
 }
 
-.projects__button {
-  position: absolute;
-  right: 1rem;
-  bottom: 1rem;
-  width: 44px;
-  height: 44px;
-  display: grid;
-  place-items: center;
-  background-color: var(--first-color);
-  color: var(--white-color);
-  border-radius: 50%;
-  font-size: 1.25rem;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  text-decoration: none;
-}
-
-.projects__button:hover {
-  background-color: var(--first-color-alt);
-  transform: scale(1.05);
-}
-
 .projects__content {
   padding: 1.25rem 1.5rem 1.5rem;
 }
@@ -579,12 +558,15 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   line-height: 1.4;
 }
 
-/* Project detail page (post.html) renders the title inside an h1.section__title. Base .section__title now wraps cleanly (width: fit-content + max-width: 100%), so most of the override from the prior commit drops out. What remains is layout-aesthetic only:
+/* Project detail page (post.html) renders the title inside an h1.section__title. Base .section__title centers itself (text-align: center + margin-inline: auto + width: fit-content) — that's right for short section labels (Projects / Contact) but reads awkward inside a project detail card where the imagery and body copy sit left-aligned. Override to left-hug:
+   - text-align / margin-inline: left so the heading sits flush with the card padding instead of bouncing around mid-card
+   - margin-block: 0.75rem 1rem to absorb the post.html inline override — layout intent now lives entirely in CSS
    - line-height: 1.2 tightens from the inherited h1 default (body line-height: 1.6) so multi-line project titles pack a touch tighter
-   - ::after { content: none } hides the geometric-box decoration — its absolute right:-8px top:-4px position is meant for short single-line labels (Projects / Contact) and sits awkwardly at the top-right corner of just the first line on multi-line wraps.
-
-   margin-inline: auto is NOT re-declared here even though the parent .title-header has no center-margin: base `.section__title { margin: 0.75rem auto 2rem }` already centers the element and the post.html inline `style="margin: 0.75rem auto 1rem"` overrides the block-end value but re-affirms margin-inline: auto. The .title-header override adds nothing new — leaving it out keeps the change minimal. */
+   - ::after { content: none } hides the geometric-box decoration — its absolute right:-8px top:-4px position is meant for short single-line labels and sits awkwardly at the top-right corner of just the first line on multi-line wraps. */
 .title-header .section__title {
+  text-align: left;
+  margin-inline: 0;
+  margin-block: 0.75rem 1rem;
   line-height: 1.2;
 }
 .title-header .section__title::after { content: none; }
