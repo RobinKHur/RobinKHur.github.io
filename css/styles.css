@@ -270,7 +270,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   row-gap: 1.5rem;
 }
 
-/* ASCII art sits at the very top of home, hugging the left edge and scaled so the portrait visually fills roughly half the viewport width on desktop. Font-size is viewport-based so the figure scales with window size. */
+/* ASCII self-portrait lives at the top of home. Font-size scales with viewport so the figure visually reads as the dominant left-half element on desktop. No background panel — the art sits directly on the page rather than inside a contained widget. `overflow: hidden` cleanly clips edges on extreme widths instead of showing an in-element scrollbar. */
 .home__ascii-art {
   text-align: left;
   margin-top: 1rem;
@@ -278,17 +278,14 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 .home__ascii-art__pre {
   font-family: ui-monospace, "SF Mono", Menlo, Consolas, "Courier New", monospace;
-  font-size: clamp(4px, 0.55vw, 7px);
+  font-size: clamp(6px, 0.45vw, 12px);
   line-height: 1;
   color: var(--text-color);
-  background-color: var(--container-color);
-  padding: 0.5rem 0.75rem;
-  border-radius: 0.75rem;
-  overflow-x: auto;
-  max-width: 100%;
   white-space: pre;
   text-align: left;
   margin: 0;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .home__data {
