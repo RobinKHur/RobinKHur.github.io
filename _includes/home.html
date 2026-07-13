@@ -1,7 +1,7 @@
 <section class="home section" id="home">
-    <div class="home__container container grid">
-        {% include ascii-art.html %}
+    {% include ascii-art.html %}
 
+    <div class="home__container container grid">
         <div class="home__data">
             <h1 class="home__name">{{ site.name }}</h1>
             <p class="home__tagline">— <span class="home__tagline-role">{{ site.tagline.role }}</span>{{ site.tagline.pitch }}</p>
