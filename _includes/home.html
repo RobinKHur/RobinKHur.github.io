@@ -1,8 +1,6 @@
 <section class="home section" id="home">
     <div class="home__container container grid">
-        <div class="home__perfil">
-            <img src="{{ site.profile_image | relative_url }}" alt="Photo of {{ site.name }}" loading="lazy">
-        </div>
+        {% include ascii-art.html %}
 
         <div class="home__data">
             <h1 class="home__name">{{ site.name }}</h1>
@@ -48,9 +46,8 @@
         </div>
 
         <a href="#about" class="home__scroll" aria-label="Scroll to about">
-            <span class="home__scroll-box"></span>
+            <img src="{{ '/assets/img/curved-arrow.svg' | relative_url }}" alt="" class="home__scroll-img" aria-hidden="true">
             <span class="home__scroll-text">Scroll Down</span>
-            <i class="ri-arrow-down-double-line" aria-hidden="true"></i>
         </a>
     </div>
 </section>

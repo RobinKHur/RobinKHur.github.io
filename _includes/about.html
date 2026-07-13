@@ -9,26 +9,10 @@
             <img src="{{ site.profile_image | relative_url }}" alt="Photo of {{ site.name }}" loading="lazy">
         </div>
 
-        <div class="about__data">
-            <div class="about__info grid">
-                {%- assign icon_list = "ri-pencil-ruler-2-line,ri-tools-line,ri-code-s-slash-line" | split: "," -%}
-                {%- for category in site.skills -%}
-                <div class="about__box">
-                    <i class="{{ icon_list[forloop.index0] | default: 'ri-tools-line' }} about__icon" aria-hidden="true"></i>
-                    <h3 class="about__title">{{ category.tools | size }}</h3>
-                    <span class="about__subtitle">{{ category.category }}</span>
-                </div>
-                {%- endfor -%}
-            </div>
-
+        <div class="about__data about__data--simple">
             <div class="about__description">
                 {{ site.description | markdownify }}
             </div>
-
-            <a href="{{ site.resume-url }}" target="_blank" rel="noopener noreferrer" class="button">
-                Download CV
-                <i class="ri-file-text-line" aria-hidden="true"></i>
-            </a>
         </div>
     </div>
 </section>
