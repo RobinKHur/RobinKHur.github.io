@@ -263,6 +263,10 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 /*=============== HOME ===============*/
 .home {
   padding-top: calc(var(--header-height) + 2rem);
+  /* Pure white so the ASCII backdrop reads clearly as "not grey" against the body's hsl(0,0%,87%). */
+  background-color: #ffffff;
+  /* Clip the absolute ASCII so it never bleeds into the About section. */
+  overflow: hidden;
 }
 
 .home__container {
@@ -270,25 +274,35 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   row-gap: 1.5rem;
 }
 
-/* ASCII self-portrait lives at the top of home. Font-size scales with viewport so the figure visually reads as the dominant left-half element on desktop. No background panel — the art sits directly on the page rather than inside a contained widget. `overflow: hidden` cleanly clips edges on extreme widths instead of showing an in-element scrollbar. */
+/* ASCII self-portrait as a massive faded backdrop that fills the upper row of home. position:absolute + z-index:0 puts it behind the bio block; opacity 0.65 + a right-side mask gradient (full opaque to 22%, mid fade through 58%, fully transparent by 92%) keeps the figure's left half dominant before fading under the bio column so the text reads on top. pointer-events:none so clicks pass through to anything layered above. */
 .home__ascii-art {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
   text-align: left;
-  margin-top: 1rem;
+  pointer-events: none;
+  opacity: 0.65;
+  grid-column: 1 / -1;
+  grid-row: 1;
+  -webkit-mask-image: linear-gradient(to right, black 22%, rgba(0, 0, 0, 0.55) 58%, transparent 92%);
+          mask-image: linear-gradient(to right, black 22%, rgba(0, 0, 0, 0.55) 58%, transparent 92%);
 }
 
 .home__ascii-art__pre {
   font-family: ui-monospace, "SF Mono", Menlo, Consolas, "Courier New", monospace;
-  font-size: clamp(6px, 0.45vw, 12px);
-  line-height: 1;
+  /* ~4× the previous size (was clamp(6,0.45vw,12) → now scales up to 48px). line-height:1.1 makes each row a bit taller than the natural cell ratio without blowing up total height. No max-width/overflow since the parent now controls the visible window via mask + .home overflow:hidden. */
+  font-size: clamp(22px, 2.6vw, 48px);
+  line-height: 1.1;
   color: var(--text-color);
   white-space: pre;
   text-align: left;
   margin: 0;
-  max-width: 100%;
-  overflow: hidden;
 }
 
 .home__data {
+  position: relative;
+  /* Sits at z-index 2 over the ASCII backdrop. No background wash — the right-fade mask gradient on `.home__ascii-art` already leaves the right column clean enough for the text to read, and the wash would have hidden that natural fade-onto-white effect. */
+  z-index: 2;
   text-align: center;
   margin-top: 1rem;
 }
@@ -368,6 +382,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 /* Scroll-down now uses an SVG arrow from the Rian reference instead of CSS animation */
 .home__scroll {
   position: relative;
+  z-index: 2;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -872,6 +887,16 @@ button:focus-visible {
   .nav__link { font-size: var(--h3-font-size); }
 }
 
+/* For small devices — the bio block sits below the ASCII not beside it, so fade the
+   bottom edge of the backdrop instead of the right edge that desktop uses.
+   Stops mirror the tightened desktop intent: opaque top, full fade-out before the bio sits. */
+@media screen and (max-width: 767px) {
+  .home__ascii-art {
+    -webkit-mask-image: linear-gradient(to bottom, black 22%, rgba(0, 0, 0, 0.55) 58%, transparent 92%);
+            mask-image: linear-gradient(to bottom, black 22%, rgba(0, 0, 0, 0.55) 58%, transparent 92%);
+  }
+}
+
 /* For medium devices */
 @media screen and (min-width: 768px) {
   .home__container {
@@ -879,8 +904,16 @@ button:focus-visible {
     align-items: start;
     column-gap: 2rem;
   }
-  /* ASCII art sits in the left column; name + data in the right column */
-  .home__data { text-align: initial; }
+  /* ASCII is now an absolute backdrop behind row 1; pin data to the right column where it sits over the fading art, and pin the scroll-down indicator to a full-width second row. */
+  .home__data {
+    grid-column: 2;
+    grid-row: 1;
+    text-align: initial;
+  }
+  .home__scroll {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
   .home__social { justify-content: flex-start; }
 
   .about__container {
