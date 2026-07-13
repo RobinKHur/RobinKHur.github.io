@@ -44,6 +44,7 @@ skills:
   - category: Engineering Analysis & Design
     tools:
       - Finite Element Analysis (FEA)
+      - Tecplot
       - GD&T (ASME Y14)
       - Lean Six Sigma
   - category: Computational
@@ -51,6 +52,7 @@ skills:
       - Python (NumPy, Matplotlib)
       - Molecular Dynamics (AMBER)
       - Visual Molecular Dynamics (VMD)
+      - Autodesk Maya
       - HPC & Batch Job Management (SLURM)
       - Data Analysis & Visualization
 

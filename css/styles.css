@@ -304,18 +304,20 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
        - at x = 40%: alpha = 0 (clean exit).
        - at x = 28%: alpha = 0.55 × 12/24 = 0.275, and visible after .home__ascii-art opacity 0.65 ⇒ ~17.9% effective.
        - at x = 34%: alpha = 0.55 × 6/24 ≈ 0.1375, ⇒ ~8.9% effective — hairline.
-     The bio column starts at ~58-60% of viewport, giving ~18-20% safe-zone of fully transparent gradient before any bio text appears. */
+     The bio column starts at ~58-60% of viewport, giving ~18-20% safe-zone of fully transparent gradient before any bio text appears.
+
+     Vertical (bottom) layer: mid-stop pushed from 50% to 80% so the now-larger ASCII figure (≈48-119% of section depending on viewport — 47% at 768px, 89% at 1440px, and greater than 100% at 1920px) keeps more of its bottom rows visible at common screen sizes — at 1440 the pre spans ~782.6px ≈ 89.4% of the 875px section, where the prior 50% mid-stop dropped mask α to ~0.106 (effective ~6.9%); with the 80% mid-stop, mask α at 89.4% reads as 0.5 × (100 − 89.4) / (100 − 80) ≈ 0.265 (effective ~17.2%). The right-fade stop is unchanged. */
   -webkit-mask-image: linear-gradient(to right, black 5%, rgba(0, 0, 0, 0.55) 12%, transparent 32%),
-                      linear-gradient(to bottom, black 25%, rgba(0, 0, 0, 0.5) 50%, transparent 100%);
+                      linear-gradient(to bottom, black 25%, rgba(0, 0, 0, 0.5) 80%, transparent 100%);
           mask-image: linear-gradient(to right, black 5%, rgba(0, 0, 0, 0.55) 12%, transparent 32%),
-                      linear-gradient(to bottom, black 25%, rgba(0, 0, 0, 0.5) 50%, transparent 100%);
+                      linear-gradient(to bottom, black 25%, rgba(0, 0, 0, 0.5) 80%, transparent 100%);
 }
 
 .home__ascii-art__pre {
   font-family: ui-monospace, "SF Mono", Menlo, Consolas, "Courier New", monospace;
-  /* clamp(3.94px, 0.632vw, 13.75px) — at 1440 renders ~50.8% of viewport (134 chars × 0.6 ratio × 9.101px ≈ 731.7px; 731.7/1440 ≈ 50.8%). Asserted computed sizes at common viewports: 1440→9.101px (≈50.8%), 1920→12.134px, 1200→7.584px, 1024→6.472px, 768→4.854px, 375→3.94px (floor takes over below ≈623 viewport — exact threshold 3.94/0.632 × 100 ≈ 623.4). Proportional ~50.8% width holds across breakpoints within the floor/ceiling — lands as the literal midpoint of the prior 48.2% step (×1.0545 effectively) rather than ×1.05 specifically, so a fraction closer to 5.5% than 5.0%. line-height:1.3 prevents glyph descenders clipping the row above. No max-width on the <pre> — `.home__ascii-art` is the positioning context (inset:0 spans the full section width). */
+  /* clamp(4.14px, 0.664vw, 14.44px) — at 1440 renders ~53.3% of viewport (134 chars × 0.6 ratio × 9.557px ≈ 768.0px; 768.0/1440 ≈ 53.3%). Asserted computed sizes at common viewports: 1440→9.557px (≈53.3%), 1920→12.749px, 1200→7.967px, 1024→6.799px, 768→5.099px, 375→4.14px (floor takes over below ≈623 viewport — exact threshold 4.14/0.664 × 100 ≈ 623.5). Proportional ~53.3% width holds across breakpoints within the floor/ceiling — current step is +5% (×1.05) over the prior 50.8% step (which itself was ×1.0545 over the prior 48.2% step). line-height:1.3 prevents glyph descenders clipping the row above. No max-width on the <pre> — `.home__ascii-art` is the positioning context (inset:0 spans the full section width). */
 
-  font-size: clamp(3.94px, 0.632vw, 13.75px);
+  font-size: clamp(4.14px, 0.664vw, 14.44px);
   line-height: 1.3;
   color: var(--text-color);
   white-space: pre;
@@ -926,11 +928,11 @@ button:focus-visible {
   .nav__link { font-size: var(--h3-font-size); }
 }
 
-/* For small devices — bio block sits below the ASCII not beside it, so the bottom edge of the backdrop fades instead of the right edge that desktop uses. Stops chosen so the bio block is completely figure-free: at x = 30% (transparent stop), alpha reaches 0 — bio block top sits at ~39% of section height (figure pre-height at floor font 4.14 × 1.3 × 63 = 339.1px in a 875px section), so an ~9% safe-zone of fully gradient-transparent space precedes any bio text. Figure renders at its full 0.65 element opacity only up to 10%; past that the mask alpha decreases — same fade curve shape as desktop but mirrored vertically. */
+/* For small devices — bio block sits below the ASCII not beside it, so the bottom edge of the backdrop fades instead of the right edge that desktop uses. Stops pushed from 20% / 30% to 25% / 40% so the +5% bigger figure (pre height = 4.14 × 1.3 × 63 ≈ 339.1px ≈ 38.8% of the 875px-section floor) keeps a small fade tail instead of being cut fully transparent at the bottom — at y = 38.8%, mask α = 0.55 × (40 − 38.8) / (40 − 25) ≈ 0.044 (effective ≈ 2.9% after the 0.65 layer opacity), versus the prior 10/20/30 stops which hit α = 0 at the same point (figure bottom row fully transparent). Bio block top sits at ~39% of section, so the figure is still essentially invisible before/inside the bio block area. */
 @media screen and (max-width: 767px) {
   .home__ascii-art {
-    -webkit-mask-image: linear-gradient(to bottom, black 10%, rgba(0, 0, 0, 0.55) 20%, transparent 30%);
-            mask-image: linear-gradient(to bottom, black 10%, rgba(0, 0, 0, 0.55) 20%, transparent 30%);
+    -webkit-mask-image: linear-gradient(to bottom, black 10%, rgba(0, 0, 0, 0.55) 25%, transparent 40%);
+            mask-image: linear-gradient(to bottom, black 10%, rgba(0, 0, 0, 0.55) 25%, transparent 40%);
   }
 }
 
