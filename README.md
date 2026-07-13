@@ -44,7 +44,7 @@ _layouts/
 _includes/                 # about, contact, footer, home, navbar, projects, services
 _projects/                 # one folder per project
 assets/
-  img/                     # favicon.png, curved-arrow.svg, random-lines.svg
+  img/                     # favicon.png
   images/profile-image/    # profile.jpg
   resume/                  # resume.pdf
   js/script.js
