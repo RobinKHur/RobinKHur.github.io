@@ -1,37 +1,24 @@
-<!-- _includes/nav.html -->
-<nav>
-    <div class="left">
-        <a href="/">{{site.name}}</a>
-    </div>
+<header class="header" id="header">
+    <nav class="nav container">
+        <a href="{{ '/' | relative_url }}" class="nav__logo">
+            <span class="nav__logo-circle"></span>
+            {{ site.name }}
+        </a>
 
-    <!-- Desktop Menu -->
-    <div class="right desktop-nav">
-        <a href="/">
-            <span>Home</span>
-        </a>
-        <a href="/projects/">
-            <span>Projects</span>
-        </a>
-        <a href="{{site.resume-url}}" target="_blank" rel="noopener noreferrer">
-            <span>Resume</span>
-        </a>
-    </div>
+        <div class="nav__buttons">
+            <i class="ri-menu-4-line nav__menu-btn" id="nav-menu-btn" aria-label="Open menu" role="button" tabindex="0"></i>
+        </div>
 
-    <!-- Mobile Menu Button -->
-    <button class="menu-toggle" aria-label="Toggle menu">
-        <i class="fa fa-bars fa-2x"></i>
-    </button>
-
-    <!-- Mobile Menu -->
-    <div class="mobile-nav">
-        <a href="/">
-            <span>Home</span>
-        </a>
-        <a href="/projects/">
-            <span>Projects</span>
-        </a>
-        <a href="{{site.resume-url}}" target="_blank" rel="noopener noreferrer">
-            <span>Resume</span>
-        </a>
-    </div>
-</nav>
+        <ul class="nav__list" id="nav-list">
+            <li class="nav__close-item">
+                <i class="ri-close-line nav__close-btn" id="nav-close-btn" aria-label="Close menu" role="button" tabindex="0"></i>
+            </li>
+            <li><a href="{{ '/' | relative_url }}#home" class="nav__link">Home</a></li>
+            <li><a href="{{ '/' | relative_url }}#about" class="nav__link">About</a></li>
+            <li><a href="{{ '/' | relative_url }}#services" class="nav__link">Skills</a></li>
+            <li><a href="{{ '/' | relative_url }}#projects" class="nav__link">Projects</a></li>
+            <li><a href="{{ '/' | relative_url }}#contact" class="nav__link">Contact</a></li>
+            <li><a href="{{ site.resume-url }}" class="nav__link nav__link-button" target="_blank" rel="noopener noreferrer">Resume</a></li>
+        </ul>
+    </nav>
+</header>

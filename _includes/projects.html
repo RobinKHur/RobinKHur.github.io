@@ -1,39 +1,40 @@
-<!-- SECTION 3: Projects -->
-<section id="projects" class="project-grid-section">
-  <h2>Projects</h2>
+<section class="projects section" id="projects">
+    <h2 class="section__title">
+        <span>Projects</span>
+        <span class="geometric-box"></span>
+    </h2>
 
-  <div class="grid-container">
-    {% for item in site.projects %}
-      {% assign folder_path = item.path | split: "/" | slice: 0, 2 | join: "/" %}
-      {% assign image_path = "/" | append: folder_path | append: "/" | append: item['main-image'] %}
+    <div class="projects__container container grid">
+        {%- for item in site.projects -%}
+        {%- assign folder_path = item.path | split: "/" | slice: 0, 2 | join: "/" -%}
+        {%- assign image_path = "/" | append: folder_path | append: item['main-image'] -%}
 
-      <div class="project-card">
+        <article class="projects__card">
+            <a href="{{ item.url }}" class="projects__image" aria-label="View project: {{ item.title }}">
+                <img src="{{ image_path | relative_url }}" alt="{{ item.title }}" loading="lazy">
+                <span class="projects__button">
+                    <i class="ri-arrow-right-up-line" aria-hidden="true"></i>
+                </span>
+            </a>
 
-        <!-- Image -->
-        <div class="project-image">
-          <img src="{{ image_path }}" alt="Screenshot of {{ item.title }}" class="project-img-full">
-        </div>
+            <div class="projects__content">
+                <span class="projects__subtitle">Mechanical / Computational</span>
+                <h3 class="projects__title">
+                    <a href="{{ item.url }}">{{ item.title }}</a>
+                </h3>
+                <p class="projects__description">{{ item.description | truncatewords: 22, "..." }}</p>
 
-        <!-- Title -->
-        <h3 class="project-title">
-          <a href="{{ item.url }}">{{ item.title }}</a>
-        </h3>
-
-        <!-- Skills (always visible) -->
-        <div class="project-skills">
-          {% for skill in item.skills %}
-            <span class="skill">{{ skill }}</span>
-          {% endfor %}
-        </div>
-
-        <!-- Truncated Description -->
-        <p class="project-description">
-          {{ item.description | truncatewords: 20, "..." }}
-        </p>
-
-        <!-- Read more -->
-        <a href="{{ item.url }}" class="read-more">Read more →</a>
-      </div>
-    {% endfor %}
-  </div>
+                <ul class="projects__skills">
+                    {%- assign skill_count = 0 -%}
+                    {%- for skill in item.skills -%}
+                    {%- if skill_count < 3 -%}
+                    <li>{{ skill }}</li>
+                    {%- assign skill_count = skill_count | plus: 1 -%}
+                    {%- endif -%}
+                    {%- endfor -%}
+                </ul>
+            </div>
+        </article>
+        {%- endfor -%}
+    </div>
 </section>

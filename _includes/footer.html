@@ -1,19 +1,14 @@
-<footer>
-    <div class="footer-content">
-        <div class="links">
-            <a href="/">
-                <span>Home</span>
-            </a>
-            <a href="/projects/">
-                <span>Projects</span>
-            </a>
-            <a href={{site.resume-url}} target="_blank" rel="noopener noreferrer">
-                <span>Resume</span>
-            </a>
-        </div>
-    </div>
-    <div class="license">
-        <span>For any question or suggestion for the portfolio template or projects, reach out <a class="help" href="mailto:admin@lowinertia.com"> Here</a> </span>
-        <p>Free-To-Engineer portfolio template © 2025 by lowinertia.com is licensed under <a href="https://creativecommons.org/licenses/by/4.0/?ref=chooser-v1">CC BY 4.0</a></p>
+<footer class="footer">
+    <div class="footer__container container grid">
+        <ul class="footer__links">
+            <li><a href="{{ '/' | relative_url }}#about" class="footer__link">About</a></li>
+            <li><a href="{{ '/' | relative_url }}#services" class="footer__link">Skills</a></li>
+            <li><a href="{{ '/' | relative_url }}#projects" class="footer__link">Projects</a></li>
+            <li><a href="{{ '/' | relative_url }}#contact" class="footer__link">Contact</a></li>
+        </ul>
+
+        <span class="footer__copy">
+            &copy; {%- assign year = site.time | date: "%Y" -%}{{ year }} {{ site.name }}. Built with Jekyll + GitHub Pages.
+        </span>
     </div>
 </footer>

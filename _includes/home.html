@@ -1,0 +1,56 @@
+<section class="home section" id="home">
+    <div class="home__container container grid">
+        <div class="home__perfil">
+            <img src="{{ site.profile_image | relative_url }}" alt="Photo of {{ site.name }}" loading="lazy">
+        </div>
+
+        <div class="home__data">
+            <h1 class="home__name">{{ site.name }}</h1>
+            <h3 class="home__headline">{{ site.headline }}</h3>
+
+            {%- if site.external-links.linkedin or site.external-links.github -%}
+            <div class="home__social">
+                {%- if site.external-links.linkedin -%}
+                <a href="https://www.linkedin.com/in/{{ site.external-links.linkedin }}/" target="_blank" rel="noopener noreferrer" class="home__social-link" aria-label="LinkedIn">
+                    <i class="ri-linkedin-box-line" aria-hidden="true"></i>
+                </a>
+                {%- endif -%}
+                {%- if site.external-links.github -%}
+                <a href="https://github.com/{{ site.external-links.github }}" target="_blank" rel="noopener noreferrer" class="home__social-link" aria-label="GitHub">
+                    <i class="ri-github-line" aria-hidden="true"></i>
+                </a>
+                {%- endif -%}
+            </div>
+            {%- endif -%}
+
+            <div class="home__info">
+                <div class="home__info-item">
+                    <h3 class="home__info-title">{{ site.projects | size }}+</h3>
+                    <span class="home__info-name">Projects</span>
+                </div>
+                <div class="home__info-item">
+                    <h3 class="home__info-title">{{ site.skills | size }}</h3>
+                    <span class="home__info-name">Skill Areas</span>
+                </div>
+            </div>
+
+            <a href="#about" class="home__button">
+                More About Me
+                <i class="ri-arrow-down-line" aria-hidden="true"></i>
+            </a>
+
+            {%- if site.resume-url -%}
+            <a href="{{ site.resume-url }}" target="_blank" rel="noopener noreferrer" class="button button-ghost" style="margin-left:.75rem">
+                View Resume
+                <i class="ri-file-text-line" aria-hidden="true"></i>
+            </a>
+            {%- endif -%}
+        </div>
+
+        <a href="#about" class="home__scroll" aria-label="Scroll to about">
+            <span class="home__scroll-box"></span>
+            <span class="home__scroll-text">Scroll Down</span>
+            <i class="ri-arrow-down-double-line" aria-hidden="true"></i>
+        </a>
+    </div>
+</section>
