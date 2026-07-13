@@ -46,6 +46,7 @@ skills:
     tools:
       - Finite Element Analysis (FEA)
       - GD&T (ASME Y14)
+      - Lean Six Sigma
   - category: Computational
     tools:
       - Python (NumPy, Matplotlib)
