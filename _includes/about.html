@@ -1,0 +1,18 @@
+<section class="about section" id="about">
+    <h2 class="section__title">
+        <span>About Me</span>
+        <span class="geometric-box"></span>
+    </h2>
+
+    <div class="about__container container grid">
+        <div class="about__perfil">
+            <img src="{{ site.profile_image | relative_url }}" alt="Photo of {{ site.name }}" loading="lazy">
+        </div>
+
+        <div class="about__data about__data--simple">
+            <div class="about__description">
+                {{ site.description | markdownify }}
+            </div>
+        </div>
+    </div>
+</section>
