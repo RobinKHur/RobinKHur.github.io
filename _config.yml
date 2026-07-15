@@ -2,6 +2,17 @@ title: Robin Hur Portfolio
 url: "https://robinkhur.github.io"
 baseurl: ""
 
+# Google Analytics 4 (GA4) Measurement ID, e.g. "G-ABC123DEF4".
+# Find it under Admin → Data Streams → Web in your GA4 property.
+# Replace the placeholder below with your real id.
+# The tag snippet only loads when the site is built with JEKYLL_ENV=production.
+# Note: GitHub Pages builds with JEKYLL_ENV=production automatically, so
+# deployment will include the snippet. Local `bundle exec jekyll serve`
+# defaults to development and will NOT include it (so your own browsing
+# during preview won't pollute analytics).
+# Set to an empty string to disable tracking.
+google_analytics: G-6XJVFQY3MF
+
 name: Robin Hur
 description: |
   I'm a mechanical engineering student at UVA who's drawn to projects that
