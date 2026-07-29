@@ -4,7 +4,7 @@
     <div class="home__container container grid">
         <div class="home__data">
             <h1 class="home__name">{{ site.name }}</h1>
-            <p class="home__tagline">— <span class="home__tagline-role">{{ site.tagline.role }}</span>{{ site.tagline.pitch }}</p>
+            <p class="home__tagline"><span class="home__tagline-role">{{ site.tagline.role }}</span><br>{{ site.tagline.pitch }}</p>
 
             {%- if site.external-links.linkedin or site.external-links.github or site.contact.email -%}
             <div class="home__social">
