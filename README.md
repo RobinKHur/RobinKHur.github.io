@@ -55,4 +55,3 @@ css/
 ## Deploy
 
 Push to the `main` branch of `robinkhur.github.io` — GitHub Pages will build with the `github-pages` gem from `Gemfile`.
-
