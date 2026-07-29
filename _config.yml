@@ -15,22 +15,23 @@ google_analytics: G-6XJVFQY3MF
 
 name: Robin Hur
 description: |
-  I'm a mechanical engineering student at UVA who's drawn to projects that
-  blend creative problem-solving with hands-on building. Whether I'm working
-  in a research lab, collaborating on design teams, or prototyping new ideas,
-  I enjoy the process of taking something from concept to reality—and learning
-  whatever I need to along the way.
+  I'm a mechanical engineering student at UVA (GPA 3.75, expected May 2027)
+  pursuing hands-on research across computational fluid dynamics, molecular
+  simulations, and closed-loop control systems. My coursework spans statics,
+  thermodynamics, fluid mechanics, dynamics, material science, mechatronics,
+  and computational methods — a foundation I apply daily in lab.
 
-  My experience spans computational work, CAD modeling, fabrication, and
-  team-based engineering projects. I'm always looking for opportunities to
-  develop new skills and contribute to work that's technically challenging and
-  genuinely useful. Outside of classes and projects, I like staying curious
-  about how things are designed and why they work the way they do. Right now,
-  I'm exploring audio engineering and microcontroller programming.
+  I've contributed to projects ranging from bio-inspired underwater robotics
+  CFD to NASA- and Lockheed Martin-sponsored aerospace materials testing, and
+  I'm a co-author on a pentapeptide self-assembly paper in ACS Biomaterials
+  Science & Engineering. I enjoy bridging computation and physical prototyping —
+  whether that means running parallel HPC jobs, designing PID controllers, or
+  building CAD assemblies for competition robots.
 
 contact:
   email: robinhur2006@gmail.com
   phone: "+1 (484) 995-5440"
+  location: "Glen Mills, PA 19342"
 
 profile_image: "/assets/images/profile-image/profile.jpg"
 
@@ -38,34 +39,41 @@ resume-url: /assets/resume/resume.pdf
 
 tagline:
   role: "Mechanical Engineering"
-  pitch: "focusing and exploring academic research, CAD design, and embedded systems at UVA."
+  pitch: "conducting computational research across CFD, molecular dynamics, and control systems at UVA."
 
 external-links:
   linkedin: robinkhur
   github: RobinKHur
 
 skills:
-  - category: 3D Modeling & Prototyping
+  - category: Design & Modeling
     tools:
-      - SolidWorks (CSWA)
-      - Autodesk Fusion
-      - Autodesk Maya
-      - OnShape
-      - 3D Printing (FDM)
-      - Low-Fidelity Rapid Prototyping
-  - category: Engineering Analysis & Design
+      - SOLIDWORKS (CSWA)
+      - Fusion 360
+      - GD&T
+      - Technical Documentation
+      - FEA
+  - category: Analysis & Control
     tools:
-      - Finite Element Analysis (FEA)
-      - Tecplot
-      - GD&T (ASME Y14)
-      - Lean Six Sigma
-  - category: Computational
-    tools:
-      - Python (NumPy, Matplotlib)
+      - Python
+      - MATLAB
+      - Simulink
+      - CFD
+      - Tecplot 360
       - Molecular Dynamics (AMBER)
-      - Visual Molecular Dynamics (VMD)
-      - HPC & Batch Job Management (SLURM)
-      - Data Analysis & Visualization
+      - PID Control
+  - category: Hardware & Tools
+    tools:
+      - Embedded Microcontrollers
+      - Git
+      - Linux
+      - High-Performance Computing (HPC)
+      - SLURM
+  - category: Languages
+    tools:
+      - English (native)
+      - Korean (fluent)
+      - French (intermediate)
 
 collections:
   projects:
