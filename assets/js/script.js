@@ -79,15 +79,17 @@ document.addEventListener('keydown', (event) => {
 /*=============== CAD EXPERIENCE IMAGE POP-UP ===============*/
 const cadModal = document.getElementById('cad-modal');
 const cadModalImage = cadModal ? cadModal.querySelector('.cad__modal-image') : null;
-const cadModalCaption = cadModal ? cadModal.querySelector('.cad__modal-caption') : null;
+const cadModalTitle = cadModal ? cadModal.querySelector('.cad__modal-title') : null;
+const cadModalDesc = cadModal ? cadModal.querySelector('.cad__modal-description') : null;
 const cadModalCloseBtn = cadModal ? cadModal.querySelector('.cad__modal-close') : null;
 
 const openCadModal = (card) => {
-    if (!cadModal || !cadModalImage || !cadModalCaption) return;
+    if (!cadModal || !cadModalImage || !cadModalTitle) return;
     cadModalImage.style.display = ''; // re-show if a previous load failed
     cadModalImage.src = card.dataset.image || '';
     cadModalImage.alt = card.dataset.title || '';
-    cadModalCaption.textContent = card.dataset.title || '';
+    cadModalTitle.textContent = card.dataset.title || '';
+    if (cadModalDesc) cadModalDesc.textContent = card.dataset.description || '';
     cadModal.setAttribute('aria-hidden', 'false');
     cadModal.classList.add('show');
     document.body.classList.add('modal-open');

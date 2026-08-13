@@ -6,9 +6,8 @@
 
     <div class="cad__container container grid">
         {%- for item in site.data.cad-experience -%}
-        <button type="button" class="cad__card" data-image="{{ item.image | relative_url }}" data-title="{{ item.title }}" aria-haspopup="dialog" aria-label="View CAD image: {{ item.title }}">
+        <button type="button" class="cad__card" data-image="{{ item.image | relative_url }}" data-title="{{ item.title }}" data-description="{{ item.description }}" aria-haspopup="dialog" aria-label="View CAD image: {{ item.title }}">
             <h3 class="cad__title">{{ item.title }}</h3>
-            <p class="cad__description">{{ item.description }}</p>
             <span class="cad__hint"><i class="ri-zoom-in-line" aria-hidden="true"></i> View</span>
         </button>
         {%- endfor -%}
@@ -22,7 +21,8 @@
                 <i class="ri-close-line" aria-hidden="true"></i>
             </button>
             <img class="cad__modal-image" src="" alt="" onerror="this.style.display='none'">
-            <p class="cad__modal-caption"></p>
+            <p class="cad__modal-title"></p>
+            <p class="cad__modal-description"></p>
         </div>
     </div>
 </section>

@@ -561,7 +561,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 /*=============== CAD EXPERIENCE ===============*/
 .cad__container {
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  /* 4 boxes per row; extra entries wrap onto additional rows (8 entries = 2 rows). 2-up on small screens so titles stay readable. */
+  grid-template-columns: repeat(4, 1fr);
   gap: 1.5rem;
 }
 
@@ -590,20 +591,26 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   color: var(--title-color);
 }
 
-.cad__description {
-  font-size: var(--small-font-size);
-  color: var(--text-color);
-}
-
 .cad__hint {
+  /* Small pill button — the only interactive affordance in the box; the box itself stays minimal (title only). */
   margin-top: auto;
   padding-top: 0.75rem;
   display: inline-flex;
   align-items: center;
+  align-self: flex-start;
   gap: 0.3rem;
   font-size: var(--smaller-font-size);
   font-weight: var(--font-semi-bold);
   color: var(--first-color);
+  border: 1px solid var(--first-color);
+  border-radius: 999px;
+  padding: 0.25rem 0.75rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.cad__card:hover .cad__hint {
+  background-color: var(--first-color);
+  color: var(--white-color);
 }
 
 /* Pop-up image viewer — hidden by default, opened by clicking a card */
@@ -647,12 +654,19 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   background-color: hsl(0, 0%, 93%);
 }
 
-.cad__modal-caption {
+.cad__modal-title {
   margin-top: 0.75rem;
   text-align: center;
-  font-size: var(--small-font-size);
+  font-size: var(--h3-font-size);
   font-weight: var(--font-semi-bold);
   color: var(--title-color);
+}
+
+.cad__modal-description {
+  margin-top: 0.25rem;
+  text-align: center;
+  font-size: var(--small-font-size);
+  color: var(--text-color);
 }
 
 .cad__modal-close {
@@ -962,6 +976,11 @@ button:focus-visible {
   .nav__link { font-size: var(--h3-font-size); }
 }
 
+/* For small devices — CAD boxes go 2-up so titles stay readable */
+@media screen and (max-width: 767px) {
+  .cad__container { grid-template-columns: repeat(2, 1fr); }
+}
+
 /* For medium devices */
 @media screen and (min-width: 768px) {
   .home__container {
@@ -1020,9 +1039,6 @@ button:focus-visible {
 
   /* 3-col projects grid (user-requested change) */
   .projects__container { grid-template-columns: repeat(3, 1fr); }
-
-  /* 4-col CAD grid on desktop */
-  .cad__container { grid-template-columns: repeat(4, 1fr); }
 
   .footer__container { padding-inline: 1.5rem; }
 
