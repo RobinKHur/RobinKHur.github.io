@@ -3,7 +3,7 @@
 - title: SW Certification
   subtitle: Certified
   description: SolidWorks CSWA certification model — part and assembly modeling practice.
-  # The pop-up renders this PDF in an embedded viewer (image/PDF both supported).
+  # The pop-up renders this PDF to a plain image with PDF.js — no browser PDF toolbar, and the certificate's own border becomes the image's border.
   image: /assets/img/cad/Certificate_C-YWDFS64MZG.pdf
 
 - title: Robot Arm Assembly

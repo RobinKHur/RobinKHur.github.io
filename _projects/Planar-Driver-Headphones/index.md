@@ -7,4 +7,5 @@ skills:
   - SolidWorks CAD
   - KiCAD
   - Soldering
+main-image: /headphones-placeholder.png
 ---

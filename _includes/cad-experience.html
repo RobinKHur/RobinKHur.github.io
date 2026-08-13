@@ -15,7 +15,7 @@
         {%- endfor -%}
     </div>
 
-    <!-- Pop-up image viewer: hidden by default, opened by clicking a card -->
+    <!-- Pop-up image viewer: hidden by default, opened by clicking a card. PDFs (e.g. the SW certificate) are rendered to a plain image with PDF.js so no browser PDF toolbar appears. -->
     <div class="cad__modal" id="cad-modal" role="dialog" aria-modal="true" aria-label="CAD design image" aria-hidden="true">
         <div class="cad__modal-backdrop" data-cad-close></div>
         <div class="cad__modal-content">
@@ -23,7 +23,6 @@
                 <i class="ri-close-line" aria-hidden="true"></i>
             </button>
             <img class="cad__modal-image" src="" alt="" onerror="this.style.display='none'">
-            <iframe class="cad__modal-doc" title="CAD design document" hidden></iframe>
             <a class="cad__modal-link" href="#" target="_blank" rel="noopener noreferrer" hidden>
                 <i class="ri-external-link-line" aria-hidden="true"></i> Open PDF
             </a>
