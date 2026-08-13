@@ -288,6 +288,9 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .home__container {
   position: relative;
   row-gap: 1.5rem;
+  /* Text hugs the left edge of the page instead of the centered 1120px container. */
+  max-width: none;
+  margin-inline: 0;
 }
 
 .home__data {
@@ -1025,10 +1028,12 @@ button:focus-visible {
   /* The `padding-top` and `background` declarations from base .home already apply here — the old re-declaration was a no-op left from earlier revisions and gets dropped. */
 
   .home__container {
-    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+    grid-template-columns: 1fr;
     align-items: start;
     column-gap: 4rem;
     padding-block: 3rem 5rem;
+    /* Restore side padding — the >=1150px `.container { padding-inline: 0 }` rule removes it. */
+    padding-inline: 1.5rem;
   }
   .home__name { font-size: var(--biggest-font-size); }
 
