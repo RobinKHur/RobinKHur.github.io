@@ -8,7 +8,9 @@
         {%- for item in site.data.cad-experience -%}
         <button type="button" class="cad__card" data-image="{{ item.image | relative_url }}" data-title="{{ item.title }}" data-description="{{ item.description }}" aria-haspopup="dialog" aria-label="View CAD image: {{ item.title }}">
             <h3 class="cad__title">{{ item.title }}</h3>
-            <span class="cad__hint"><i class="ri-zoom-in-line" aria-hidden="true"></i> View</span>
+            {%- if item.subtitle -%}
+            <p class="cad__subtitle">{{ item.subtitle }}</p>
+            {%- endif -%}
         </button>
         {%- endfor -%}
     </div>
@@ -21,6 +23,10 @@
                 <i class="ri-close-line" aria-hidden="true"></i>
             </button>
             <img class="cad__modal-image" src="" alt="" onerror="this.style.display='none'">
+            <iframe class="cad__modal-doc" title="CAD design document" hidden></iframe>
+            <a class="cad__modal-link" href="#" target="_blank" rel="noopener noreferrer" hidden>
+                <i class="ri-external-link-line" aria-hidden="true"></i> Open PDF
+            </a>
             <p class="cad__modal-title"></p>
             <p class="cad__modal-description"></p>
         </div>

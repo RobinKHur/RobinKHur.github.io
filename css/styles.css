@@ -283,14 +283,19 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   padding-bottom: 4rem;
   /* Full-viewport floor so the section below (About) stays out of view on first load — the hero is just the bio block now that the ASCII figure is gone, so the extra vertical space reads as intentional whitespace. */
   min-height: 100vh;
+  /* Flex column so `.home__container`'s `margin-block: auto` can center the bio block vertically. */
+  display: flex;
+  flex-direction: column;
 }
 
 .home__container {
   position: relative;
   row-gap: 1.5rem;
-  /* Text hugs the left edge of the page instead of the centered 1120px container. */
-  max-width: none;
-  margin-inline: 0;
+  /* Matches the centered `.container` column used by the About section, so the hero text lines up with the left edge of the About photo. `margin-block: auto` centers the block vertically in the full-height `.home` flex column. */
+  width: 100%;
+  max-width: 1120px;
+  margin-inline: auto;
+  margin-block: auto;
 }
 
 .home__data {
@@ -594,26 +599,15 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   color: var(--title-color);
 }
 
-.cad__hint {
-  /* Small pill button — the only interactive affordance in the box; the box itself stays minimal (title only). */
-  margin-top: auto;
-  padding-top: 0.75rem;
-  display: inline-flex;
-  align-items: center;
-  align-self: flex-start;
-  gap: 0.3rem;
+.cad__subtitle {
+  /* Light secondary label under the box title (e.g. "Certified", "SW Cert"). */
   font-size: var(--smaller-font-size);
-  font-weight: var(--font-semi-bold);
-  color: var(--first-color);
-  border: 1px solid var(--first-color);
-  border-radius: 999px;
-  padding: 0.25rem 0.75rem;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  color: var(--text-color-light);
 }
 
-.cad__card:hover .cad__hint {
-  background-color: var(--first-color);
-  color: var(--white-color);
+/* The title is the clickable affordance — it tints orange on hover to signal it. */
+.cad__card:hover .cad__title {
+  color: var(--first-color);
 }
 
 /* Pop-up image viewer — hidden by default, opened by clicking a card */
@@ -656,6 +650,34 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   /* Light grey well behind the image so missing placeholder files don't look broken. */
   background-color: hsl(0, 0%, 93%);
 }
+
+.cad__modal-doc {
+  /* Embedded viewer for PDF entries (e.g. the SW certificate); same footprint as the image. No `display` here so the `hidden` attribute keeps it hidden when it's not in use. */
+  width: 100%;
+  height: 68vh;
+  border: none;
+  border-radius: 0.5rem;
+  background-color: hsl(0, 0%, 93%);
+}
+
+.cad__modal-doc[hidden] { display: none; }
+
+.cad__modal-link {
+  /* Fallback for browsers that block PDFs inside iframes — always opens in a new tab. */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  margin-top: 0.75rem;
+  font-size: var(--small-font-size);
+  font-weight: var(--font-semi-bold);
+  color: var(--first-color);
+  text-decoration: none;
+}
+
+.cad__modal-link:hover { text-decoration: underline; }
+
+.cad__modal-link[hidden] { display: none; }
 
 .cad__modal-title {
   margin-top: 0.75rem;
@@ -1032,8 +1054,8 @@ button:focus-visible {
     align-items: start;
     column-gap: 4rem;
     padding-block: 3rem 5rem;
-    /* Restore side padding — the >=1150px `.container { padding-inline: 0 }` rule removes it. */
-    padding-inline: 1.5rem;
+    /* Match `.container { padding-inline: 0 }` (declared above) so the text stays flush with the About image's left edge. */
+    padding-inline: 0;
   }
   .home__name { font-size: var(--biggest-font-size); }
 

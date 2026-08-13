@@ -1,14 +1,17 @@
 # General CAD Experience — each entry is one small box in the 4-column grid.
 # To add your images, drop a file into assets/img/cad/ and update `image` below.
 - title: SW Certification
+  subtitle: Certified
   description: SolidWorks CSWA certification model — part and assembly modeling practice.
-  image: /assets/img/cad/sw-certification.jpg
+  # The pop-up renders this PDF in an embedded viewer (image/PDF both supported).
+  image: /assets/img/cad/Certificate_C-YWDFS64MZG.pdf
 
 - title: Robot Arm Assembly
   description: Multi-part robotic arm assembly with mates and a motion study.
   image: /assets/img/cad/robot-arm-assembly.jpg
 
 - title: Rim of Wheel
+  subtitle: SW Cert
   description: Wheel rim modeled with swept profiles, fillets, and pattern features.
   image: /assets/img/cad/rim-of-wheel.jpg
 

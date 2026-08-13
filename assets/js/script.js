@@ -79,15 +79,35 @@ document.addEventListener('keydown', (event) => {
 /*=============== CAD EXPERIENCE IMAGE POP-UP ===============*/
 const cadModal = document.getElementById('cad-modal');
 const cadModalImage = cadModal ? cadModal.querySelector('.cad__modal-image') : null;
+const cadModalDoc = cadModal ? cadModal.querySelector('.cad__modal-doc') : null;
+const cadModalLink = cadModal ? cadModal.querySelector('.cad__modal-link') : null;
 const cadModalTitle = cadModal ? cadModal.querySelector('.cad__modal-title') : null;
 const cadModalDesc = cadModal ? cadModal.querySelector('.cad__modal-description') : null;
 const cadModalCloseBtn = cadModal ? cadModal.querySelector('.cad__modal-close') : null;
 
 const openCadModal = (card) => {
-    if (!cadModal || !cadModalImage || !cadModalTitle) return;
-    cadModalImage.style.display = ''; // re-show if a previous load failed
-    cadModalImage.src = card.dataset.image || '';
-    cadModalImage.alt = card.dataset.title || '';
+    if (!cadModal || !cadModalTitle) return;
+    const src = card.dataset.image || '';
+    const isPdf = src.toLowerCase().endsWith('.pdf');
+    // PDFs render in an embedded viewer; everything else uses the <img>.
+    if (cadModalImage) {
+        cadModalImage.style.display = isPdf ? 'none' : '';
+        if (!isPdf) {
+            cadModalImage.src = src;
+        } else {
+            cadModalImage.removeAttribute('src');
+        }
+        cadModalImage.alt = card.dataset.title || '';
+    }
+    if (cadModalDoc) {
+        cadModalDoc.hidden = !isPdf;
+        cadModalDoc.src = isPdf ? src : '';
+    }
+    // Fallback link so the PDF is always reachable, even in browsers that block PDFs in iframes.
+    if (cadModalLink) {
+        cadModalLink.hidden = !isPdf;
+        cadModalLink.href = isPdf ? src : '#';
+    }
     cadModalTitle.textContent = card.dataset.title || '';
     if (cadModalDesc) cadModalDesc.textContent = card.dataset.description || '';
     cadModal.setAttribute('aria-hidden', 'false');
@@ -102,6 +122,8 @@ const closeCadModal = () => {
     cadModal.setAttribute('aria-hidden', 'true');
     document.body.classList.remove('modal-open');
     if (cadModalImage) cadModalImage.src = '';
+    if (cadModalDoc) cadModalDoc.src = '';
+    if (cadModalLink) cadModalLink.href = '#';
 };
 
 document.querySelectorAll('.cad__card').forEach((card) => {
