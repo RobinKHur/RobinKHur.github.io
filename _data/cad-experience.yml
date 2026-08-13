@@ -1,0 +1,17 @@
+# General CAD Experience — each entry is one small box in the 4-column grid.
+# To add your images, drop a file into assets/img/cad/ and update `image` below.
+- title: SW Certification
+  description: SolidWorks CSWA certification model — part and assembly modeling practice.
+  image: /assets/img/cad/sw-certification.jpg
+
+- title: Robot Arm Assembly
+  description: Multi-part robotic arm assembly with mates and a motion study.
+  image: /assets/img/cad/robot-arm-assembly.jpg
+
+- title: Rim of Wheel
+  description: Wheel rim modeled with swept profiles, fillets, and pattern features.
+  image: /assets/img/cad/rim-of-wheel.jpg
+
+- title: Planar Driver Encasing
+  description: Enclosure housing a planar driver mechanism with clearance checks.
+  image: /assets/img/cad/planar-driver-encasing.jpg

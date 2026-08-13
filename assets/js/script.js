@@ -75,3 +75,44 @@ document.addEventListener('keydown', (event) => {
         if (navMenuBtn) navMenuBtn.focus();
     }
 });
+
+/*=============== CAD EXPERIENCE IMAGE POP-UP ===============*/
+const cadModal = document.getElementById('cad-modal');
+const cadModalImage = cadModal ? cadModal.querySelector('.cad__modal-image') : null;
+const cadModalCaption = cadModal ? cadModal.querySelector('.cad__modal-caption') : null;
+const cadModalCloseBtn = cadModal ? cadModal.querySelector('.cad__modal-close') : null;
+
+const openCadModal = (card) => {
+    if (!cadModal || !cadModalImage || !cadModalCaption) return;
+    cadModalImage.style.display = ''; // re-show if a previous load failed
+    cadModalImage.src = card.dataset.image || '';
+    cadModalImage.alt = card.dataset.title || '';
+    cadModalCaption.textContent = card.dataset.title || '';
+    cadModal.setAttribute('aria-hidden', 'false');
+    cadModal.classList.add('show');
+    document.body.classList.add('modal-open');
+    if (cadModalCloseBtn) cadModalCloseBtn.focus();
+};
+
+const closeCadModal = () => {
+    if (!cadModal) return;
+    cadModal.classList.remove('show');
+    cadModal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('modal-open');
+    if (cadModalImage) cadModalImage.src = '';
+};
+
+document.querySelectorAll('.cad__card').forEach((card) => {
+    card.addEventListener('click', () => openCadModal(card));
+});
+
+if (cadModal) {
+    cadModal.querySelectorAll('[data-cad-close]').forEach((el) => {
+        el.addEventListener('click', closeCadModal);
+    });
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && cadModal.classList.contains('show')) {
+            closeCadModal();
+        }
+    });
+}

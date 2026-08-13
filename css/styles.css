@@ -60,7 +60,11 @@
   margin: 0;
 }
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  /* Offset anchor jumps (nav links, the "More About Me" button, skip link) by the fixed header height plus breathing room, so the section heading isn't hidden under the navbar when the page scrolls to it. Re-declared at >=1150px where the nav grows to calc(var(--header-height) + 1rem). */
+  scroll-padding-top: calc(var(--header-height) + 1.5rem);
+}
 
 body {
   font-family: var(--body-font);
@@ -277,10 +281,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   padding-top: calc(var(--header-height) + 2rem);
   /* Slight extension so the home section feels less cramped. Note: `.section { padding-block: 4rem 2rem }` already declares bottom padding on this same element, but `.home` is defined later in the stylesheet so this value replaces (not adds to) the section's 2rem. Bumping to 4rem gives a net +2rem of extension across all breakpoints without touching the (>=1150px) `.home__container { padding-block: 3rem 5rem }` which already dominates on large screens. */
   padding-bottom: 4rem;
-  /* Positioning context for the absolute ASCII art: `position: relative` makes .home the offsetParent for `.home__ascii-art`'s `inset: 0` (anchors the figure to the full section width, flush against the left edge). Background inherits from the page (`var(--page-bg)`) so the home section visually flows with body + navbar — no color break. */
-  position: relative;
-  /* Min-height floor 875 / ceiling 1625 (vh=75 keeps mobile proportional). At the ASCII ceiling (15.02px font × 1.3 × 63 ≈ 1229.5px pre height) the figure sits with ~395.5px breathing room under the 1625px ceiling; the bottom-fade mask layer terminates any small overflowing residual softly at the home's bottom edge. */
-  min-height: clamp(875px, 75vh, 1625px);
+  /* Full-viewport floor so the section below (About) stays out of view on first load — the hero is just the bio block now that the ASCII figure is gone, so the extra vertical space reads as intentional whitespace. */
+  min-height: 100vh;
 }
 
 .home__container {
@@ -288,53 +290,9 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   row-gap: 1.5rem;
 }
 
-/* ASCII self-portrait as a faded backdrop that fills the entire home section — anchors to `.home` directly (not `.home__container`) so inset:0 spans the full window width, putting the figure flush against the left edge. position:absolute + z-index:0 places it behind the bio block; opacity 0.65 + a right-side mask gradient (full opaque to 7%, mid fade through 16%, fully transparent by 40%) keeps the figure visually anchored to the left before fading away well before the bio column starts.
-
-   Bio column geometry: container max-width 1120px is centered (or fills the viewport on narrower screens), with a 1.5fr/1fr grid + 4rem column gap at >=1150. The bio column starts at ≈57.8–58.8% of the home section width and ends at ≈88.9% (the container's right edge). The 40% transparent stop leaves an 18-20% safe-zone where the figure is fully gradient-transparent before bio text appears — the figure fades "into" the bio text rather than competing behind it.
-
-   - `pointer-events: none` so clicks pass through to anything layered above.
-   - `user-select: none` so dragging the cursor across the figure doesn't highlight the ASCII glyphs — the figure is decorative (`aria-hidden="true"`) and selection is a UX defect. user-select inherits per the CSS UA stylesheet, so the inner .home__ascii-art__pre also can't be highlighted from a parent-level setting. */
-.home__ascii-art {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  text-align: left;
-  pointer-events: none;
-  user-select: none;
-  opacity: 0.65;
-  /* Two mask gradients stacked (stops are % of section height since both anchor to .home__ascii-art inset:0). The horizontal layer fades right from 5% / 12% / 32% to clear the bio column (1.5fr:1fr grid in a centered 1120px container, bio measured ~58-60% of viewport at 1440 — transparent at 32% leaves ~26% safe-zone of fully gradient-transparent space before any bio text). The bottom layer fades from 25% / 50% / 100% so the mask overlaps the rendered figure pre-height directly — at 1440 the figure spans roughly 0-65% of section, so the 25→50% mask path crosses the visible figure pixels (where the fade is actually doing visual work) rather than fading empty space below the figure. CSS `mask-image` with multiple comma-separated layers intersects them — the figure is visible only where BOTH layers are opaque, giving a top-left rectangle with a soft right edge and a soft bottom edge. The -webkit- and unprefixed entries must stay in lockstep.
-
-     Stops are chosen to leave the bio column completely figure-free: at x = 40% (transparent stop), alpha reaches 0 — bio column starts at ~58-60% of viewport, so an ~18-20% safe-zone of fully gradient-transparent space precedes any bio text.     The figure renders at its full 0.65 element opacity only up to 7%; past that the mask alpha decreases, leaving a long, soft fade tail. Linear interpolation:
-       - between 16% (α=0.55) and 40% (α=0): alpha = 0.55 × (40 − x) / (40 − 16) for 16% ≤ x ≤ 40%.
-       - at x = 40%: alpha = 0 (clean exit).
-       - at x = 28%: alpha = 0.55 × 12/24 = 0.275, and visible after .home__ascii-art opacity 0.65 ⇒ ~17.9% effective.
-       - at x = 34%: alpha = 0.55 × 6/24 ≈ 0.1375, ⇒ ~8.9% effective — hairline.
-     The bio column starts at ~58-60% of viewport, giving ~18-20% safe-zone of fully transparent gradient before any bio text appears.
-
-     Vertical (bottom) layer: mid-stop ladder across the cumulative figure resize — 50% → 80% → 85% → 88% (transparent stop held at 100%). At 1440 the pre is ~815.0px ≈ 93.1% of the 875px-section floor (≈50% at 768 and ≈124% at 1920). With the current 88% mid-stop, mask α at 93.1% = 0.5 × (100 − 93.1) / (100 − 88) ≈ 0.286 (effective ~18.58% after the 0.65 layer opacity), re-pinning effective opacity to the ~17-19% target band so the figure bottom stays visible across the resize ladder. The right-fade stop is unchanged. */
-  -webkit-mask-image: linear-gradient(to right, black 5%, rgba(0, 0, 0, 0.55) 12%, transparent 32%),
-                      linear-gradient(to bottom, black 25%, rgba(0, 0, 0, 0.5) 88%, transparent 100%);
-          mask-image: linear-gradient(to right, black 5%, rgba(0, 0, 0, 0.55) 12%, transparent 32%),
-                      linear-gradient(to bottom, black 25%, rgba(0, 0, 0, 0.5) 88%, transparent 100%);
-}
-
-.home__ascii-art__pre {
-  font-family: ui-monospace, "SF Mono", Menlo, Consolas, "Courier New", monospace;
-  /* clamp(4.30px, 0.691vw, 15.02px) — at 1440 renders ~55.6% of viewport (134 chars × 0.6 ratio × 9.950px ≈ 800.0px; 800.0/1440 ≈ 55.6%). Asserted computed sizes at common viewports: 1440→9.950px (≈55.6%), 1920→13.267px, 1200→8.292px, 1024→7.080px, 768→5.306px, 375→4.30px (floor takes over below ≈622 viewport — exact threshold 4.30/0.691 × 100 ≈ 622.3). Proportional ~55.6% width holds across breakpoints within the floor/ceiling — current step is +2% (×1.02), cumulative ladder 48.2% → 55.6%. line-height:1.3 prevents glyph descenders clipping the row above. No max-width on the <pre> — `.home__ascii-art` is the positioning context (inset:0 spans the full section width). */
-
-  font-size: clamp(4.09px, 0.656vw, 14.27px);
-  line-height: 1.3;
-  color: var(--text-color);
-  white-space: pre;
-  text-align: left;
-  margin: 0;
-}
-
 .home__data {
-  position: relative;
-  /* Sits at z-index 2 over the ASCII backdrop. No background wash — the right-fade mask gradient on `.home__ascii-art` already leaves the right column clean enough for the text to read, and the wash would have hidden that natural fade-onto-white effect. */
-  z-index: 2;
-  text-align: center;
+  /* Bio block hugs the left edge of the home section. */
+  text-align: initial;
   margin-top: 1rem;
 }
 
@@ -360,7 +318,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 .home__social {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   column-gap: 1.25rem;
   margin-bottom: 1.5rem;
 }
@@ -600,6 +558,125 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   font-size: var(--smaller-font-size);
   font-weight: var(--font-medium);
 }
+
+/*=============== CAD EXPERIENCE ===============*/
+.cad__container {
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1.5rem;
+}
+
+.cad__card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  text-align: left;
+  background-color: var(--container-color);
+  /* Light border matches the other pill/card silhouettes on the white page background. */
+  border: 1px solid hsl(0, 0%, 85%);
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  cursor: pointer;
+  font-family: inherit;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cad__card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px hsla(0, 0%, 0%, 0.12);
+}
+
+.cad__title {
+  font-size: var(--h3-font-size);
+  color: var(--title-color);
+}
+
+.cad__description {
+  font-size: var(--small-font-size);
+  color: var(--text-color);
+}
+
+.cad__hint {
+  margin-top: auto;
+  padding-top: 0.75rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: var(--smaller-font-size);
+  font-weight: var(--font-semi-bold);
+  color: var(--first-color);
+}
+
+/* Pop-up image viewer — hidden by default, opened by clicking a card */
+.cad__modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: none;
+  place-items: center;
+  padding: 1.5rem;
+}
+
+.cad__modal.show { display: grid; }
+
+.cad__modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background-color: hsla(0, 0%, 0%, 0.45);
+  /* Blur everything behind the pop-up. The -webkit- and unprefixed entries must stay in lockstep. */
+  -webkit-backdrop-filter: blur(6px);
+          backdrop-filter: blur(6px);
+}
+
+.cad__modal-content {
+  position: relative;
+  /* Small pop-up: capped at ~520px wide, never wider than the viewport. */
+  max-width: min(92vw, 520px);
+  background-color: var(--page-bg);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  box-shadow: 0 12px 40px hsla(0, 0%, 0%, 0.3);
+}
+
+.cad__modal-image {
+  display: block;
+  width: 100%;
+  max-height: 68vh;
+  object-fit: contain;
+  border-radius: 0.5rem;
+  /* Light grey well behind the image so missing placeholder files don't look broken. */
+  background-color: hsl(0, 0%, 93%);
+}
+
+.cad__modal-caption {
+  margin-top: 0.75rem;
+  text-align: center;
+  font-size: var(--small-font-size);
+  font-weight: var(--font-semi-bold);
+  color: var(--title-color);
+}
+
+.cad__modal-close {
+  position: absolute;
+  top: -0.75rem;
+  right: -0.75rem;
+  width: 2rem;
+  height: 2rem;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background-color: var(--first-color);
+  color: var(--white-color);
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 2px 8px hsla(0, 0%, 0%, 0.25);
+  transition: background-color 0.3s ease;
+}
+
+.cad__modal-close:hover { background-color: var(--first-color-alt); }
+
+/* Keep the page from scrolling while the pop-up is open */
+body.modal-open { overflow: hidden; }
 
 /*=============== CONTACT ===============*/
 .contact { position: relative; }
@@ -885,24 +962,16 @@ button:focus-visible {
   .nav__link { font-size: var(--h3-font-size); }
 }
 
-/* For small devices — bio block sits below the ASCII not beside it, so the bottom edge of the backdrop fades instead of the right edge that desktop uses. Mid-stop ladder across the cumulative +5%/+5%/+2% figure resize — 20% → 25% → 30% (transparent stop held at 40% — mobile fade band is structurally capped at 10-40%, so figure-bottom row is near-invisible regardless of mid-stop). At the floor, pre height = 4.22 × 1.3 × 63 ≈ 345.7px ≈ 39.5% of the 875px-section. With the current 10/30/40 stops, mask α at y = 39.5% = 0.55 × (40 − 39.5) / (40 − 30) ≈ 0.0275 (effective ≈ 1.79% after the 0.65 layer opacity); the prior step with the 25% mid-stop read α ≈ 0.0183 (effective ≈ 1.19%). Bio block top sits at ~39% of section, so the figure remains essentially invisible at/inside the bio-block area regardless of mid-stop adjustment. */
-@media screen and (max-width: 767px) {
-  .home__ascii-art {
-    -webkit-mask-image: linear-gradient(to bottom, black 10%, rgba(0, 0, 0, 0.55) 30%, transparent 40%);
-            mask-image: linear-gradient(to bottom, black 10%, rgba(0, 0, 0, 0.55) 30%, transparent 40%);
-  }
-}
-
 /* For medium devices */
 @media screen and (min-width: 768px) {
   .home__container {
-    grid-template-columns: 1.3fr 1fr;
+    grid-template-columns: 1fr;
     align-items: start;
     column-gap: 2rem;
   }
-  /* ASCII lives outside `.home__container` now (anchored to `.home`), so the grid here only sees `.home__data`. Data sits in the right column over the fading ASCII. */
+  /* Bio block sits in the left column; the right column is gone since the ASCII figure was removed. */
   .home__data {
-    grid-column: 2;
+    grid-column: 1;
     grid-row: 1;
     text-align: initial;
   }
@@ -931,6 +1000,8 @@ button:focus-visible {
     /* Re-declare padding-inline here to beat `.container { padding-inline: 0 }` (declared just above) at >=1150px — same (0,1,0) specificity, this rule wins by source order within the media block. The base .nav { padding-inline: 1.25rem } rule is in turn overridden by the media's .container rule because that media rule comes later in the file, so without this re-declaration the desktop navbar would sit flush against the viewport edges (padding-inline: 0). */
     padding-inline: 1.25rem;
   }
+  /* Taller desktop nav needs a bigger scroll offset so anchored sections still clear it. */
+  html { scroll-padding-top: calc(var(--header-height) + 2rem); }
 
   /* The `padding-top` and `background` declarations from base .home already apply here — the old re-declaration was a no-op left from earlier revisions and gets dropped. */
 
@@ -949,6 +1020,9 @@ button:focus-visible {
 
   /* 3-col projects grid (user-requested change) */
   .projects__container { grid-template-columns: repeat(3, 1fr); }
+
+  /* 4-col CAD grid on desktop */
+  .cad__container { grid-template-columns: repeat(4, 1fr); }
 
   .footer__container { padding-inline: 1.5rem; }
 
