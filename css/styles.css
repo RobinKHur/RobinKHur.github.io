@@ -118,32 +118,27 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   position: relative;
 }
 
-.section__title::after {
+.section__title::after,
+.section__title::before {
   content: "";
   width: 40px;
   height: 28px;
   background-color: hsla(14, 98%, 50%, 0.2);
   position: absolute;
+}
+
+.section__title::after {
   top: -4px;
   right: -8px;
 }
 
-.geometric-box {
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  background-color: var(--first-color);
-  rotate: -30deg;
+.section__title::before {
+  top: -10px;
+  right: -16px;
 }
 
-.geometric-box::after {
-  content: "";
-  position: absolute;
-  width: 16px;
-  height: 16px;
-  border: 3px solid var(--black-color);
-  left: -5px;
-  top: -5px;
+.geometric-box {
+  display: none;
 }
 
 .main {
@@ -535,7 +530,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   margin-block: 0.75rem 1rem;
   line-height: 1.2;
 }
-.title-header .section__title::after { content: none; }
+.title-header .section__title::after,
+.title-header .section__title::before { content: none; }
 
 .projects__title a {
   color: var(--title-color);
