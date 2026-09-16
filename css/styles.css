@@ -300,13 +300,13 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 
 .home__name {
-  font-size: var(--biggest-font-size);
+  font-size: 3rem;
   line-height: 1.1;
   margin-bottom: 0.5rem;
 }
 
 .home__tagline {
-  font-size: var(--h2-font-size);
+  font-size: 1.5rem;
   font-weight: var(--font-regular);
   color: var(--text-color);
   line-height: 1.6;
@@ -327,7 +327,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 
 .home__social-link {
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   color: var(--title-color);
   transition: transform 0.3s ease, color 0.3s ease;
 }
@@ -1052,7 +1052,8 @@ button:focus-visible {
     /* Match `.container { padding-inline: 0 }` (declared above) so the text stays flush with the About image's left edge. */
     padding-inline: 0;
   }
-  .home__name { font-size: var(--biggest-font-size); }
+  .home__name { font-size: 5rem; }
+  .home__tagline { font-size: 1.75rem; }
 
   .about__container { grid-template-columns: 320px 1fr; column-gap: 4rem; }
   .about__perfil { width: 320px; height: 320px; }
